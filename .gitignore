@@ -1,0 +1,8 @@
+﻿################################################################################
+# Este arquivo .gitignore foi criado automaticamente pelo Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs
+/SevenFoodApp/bin/Debug/net8.0
+/SevenFoodApp/.vs/SevenFoodApp
+/SevenFoodApp/obj
