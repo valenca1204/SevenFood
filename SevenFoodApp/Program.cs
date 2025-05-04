@@ -1,2 +1,16 @@
-﻿// See https://aka.ms/new-console-template for more information
-Console.WriteLine("Hello, World!");
+﻿using SevenFoodApp.View;
+
+Boolean hasContinue = true;
+
+while (hasContinue)
+{
+    Menu.Main();
+    Menu.CODE option = Menu.GetOption("Escolha uma opção");
+
+    hasContinue = HasContinue(option);
+}
+
+bool HasContinue(Menu.CODE option)
+{
+    return !Menu.GetCodeExit().Equals(option);
+}
