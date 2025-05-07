@@ -17,7 +17,7 @@ namespace SevenFoodApp.View
 
         public static void Main()
         {
-            Console.Clear();
+            // Console.Clear();
             Console.WriteLine("Bem Vindo do 7Food");
             Console.WriteLine();
             Console.WriteLine("1 - Usuário");
