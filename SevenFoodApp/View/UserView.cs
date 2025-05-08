@@ -1,6 +1,7 @@
 ﻿using SevenFoodApp.Controller;
 using SevenFoodApp.Interfaces;
 using SevenFoodApp.Model;
+using SevenFoodApp.Repository;
 using SevenFoodApp.Util;
 using System;
 using System.Collections.Generic;
@@ -11,29 +12,30 @@ using System.Threading.Tasks;
 
 namespace SevenFoodApp.View
 {
-    internal class UserView : IView<User>
+    internal class UserView : IView
     {
         int small = (int)Enums.ColumnSize.small;
         int medium = (int)Enums.ColumnSize.medium;
         int large = (int)Enums.ColumnSize.large;
+        
+        private UserController controller;
 
-        public User? add()
+        public bool add()
         {
             try
             {
                 Console.Write("Nome: ");
                 string name = Console.ReadLine() ?? "Nome não Informado";
-                string password = UserController.BuilderRandomPassword();
-                return new User(name, password);
+                return this.controller.Add(name);
 
             } catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
-                return null;
+                return false;
             }
         }
 
-        public bool remove(int id)
+        public bool remove()
         {
             throw new NotImplementedException();
         }
@@ -45,6 +47,11 @@ namespace SevenFoodApp.View
             Console.WriteLine($"Senha: {obj.Password}");
         }
 
+        public void show()
+        {
+            throw new NotImplementedException();
+        }
+
         public void showAll(List<User> users)
         {
             this.showTitle();            
@@ -52,6 +59,11 @@ namespace SevenFoodApp.View
             {
                 this.showInLine(user);
             }
+        }
+
+        public void showAll()
+        {
+            throw new NotImplementedException();
         }
 
         private void showInLine(User user)

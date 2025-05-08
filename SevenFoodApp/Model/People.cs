@@ -12,8 +12,9 @@ namespace SevenFoodApp.Model
         public string Name { get; set; }
         public string Password { get; set; }
 
-        public People(string name, string password)
+        public People(int id, string name, string password)
         {
+            this.Id = id;
             this.Name = name;
             this.Password = password;
         }

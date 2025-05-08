@@ -1,5 +1,8 @@
-﻿using System;
+﻿using SevenFoodApp.Model;
+using SevenFoodApp.Repository;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,8 +11,17 @@ namespace SevenFoodApp.Controller
 {
     internal class UserController
     {
+        private UserRepository userRepository = new UserRepository();
+
+        public bool Add(string name)
+        {
+            int id = this.GetNextId();
+            string password = this.BuilderRandomPassword();
+            User user = new User(id, name, password);
+            return userRepository.Insert(user);
+        }
         
-        public static string BuilderRandomPassword()
+        private string BuilderRandomPassword()
         {
             const string UPPER = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
             const string LOWWER = "abcdefghijklmnopqrstuvwxyz";
@@ -32,9 +44,9 @@ namespace SevenFoodApp.Controller
 
         private bool IsValidPassWord(string password) => password.Length >= 8;
 
-        public int getNextId()
+        private int GetNextId()
         {
-            return 0;
+            return userRepository.getLastId() + 1;
         }
     }
 }

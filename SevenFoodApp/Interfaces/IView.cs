@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace SevenFoodApp.Interfaces
 {
-    internal interface IView<T>
+    internal interface IView
     {
-        T? add();
-        void show(T obj);
-        void showAll(List<T> objs);
-        bool remove(int id);
+        bool add();
+        void show();
+        void showAll();
+        bool remove();
 
 
     }
