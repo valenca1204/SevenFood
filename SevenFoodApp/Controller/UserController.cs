@@ -32,6 +32,9 @@ namespace SevenFoodApp.Controller
 
         private bool IsValidPassWord(string password) => password.Length >= 8;
 
-        //private bool Change
+        public int getNextId()
+        {
+            return 0;
+        }
     }
 }
