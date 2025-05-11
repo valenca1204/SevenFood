@@ -163,6 +163,11 @@ namespace SevenFoodApp.Repository
         {
             return $"{user.Id},{user.Name},{user.Password}";
         }
-        
+
+        internal bool Loggin(int id, string password)
+        {
+            User user = this.GetById(id)!;
+            return user != null && user.Password == password;
+        }
     }
 }

@@ -21,7 +21,7 @@ namespace SevenFoodApp.View
                 Console.WriteLine("CADASTRAR NOVO USUÁRIO\n");
                 Console.Write("Nome: ");
                 string name = Console.ReadLine() ?? "Nome não Informado";
-                
+
                 if (this.controller.Add(name))
                     Console.WriteLine("Usuario Cadastrado com sucesso.");
                 else
@@ -144,6 +144,33 @@ namespace SevenFoodApp.View
             Console.Write($"NOME".PadRight(this.large));
             Console.WriteLine($"SENHA".PadRight(this.medium));
             Console.WriteLine($"".PadRight(totalSize, '-'));
+        }
+
+        public void Login()
+        {
+            bool canTryLogin = false;
+            string? id;
+            string? password;
+            bool approved = false;
+            do
+            {
+                Console.WriteLine("------------------------");
+                Console.WriteLine("|  >>> SEVEN FOOD <<<  |");
+                Console.WriteLine("------------------------");
+                Console.Write("ID: ");
+                id = Console.ReadLine();
+                Console.Write("Senha: ");
+                password = Console.ReadLine();
+
+                canTryLogin = (id != null) && (password != null);
+                if (canTryLogin)
+                    approved = controller.Loggin(id!, password!);
+
+                if (!approved)
+                    Console.WriteLine("Opa, algo de errado não está certo\nTente novamente");
+
+            } while (canTryLogin && !approved);
+
         }
     }
 }
