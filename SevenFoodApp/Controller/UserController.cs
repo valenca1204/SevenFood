@@ -1,11 +1,5 @@
 ﻿using SevenFoodApp.Model;
 using SevenFoodApp.Repository;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SevenFoodApp.Controller
 {
@@ -47,6 +41,27 @@ namespace SevenFoodApp.Controller
         private int GetNextId()
         {
             return userRepository.getLastId() + 1;
+        }
+
+        public List<User> getAll()
+        {
+            return userRepository.GetAll();
+        }
+
+        public User? getById(int id)
+        {
+            return userRepository.GetById(id);
+        }
+
+        public bool remove(int id)
+        {
+            return userRepository.Delete(id);
+        }
+
+        internal bool update(int id, string name, string password)
+        {
+            User user = new User(id, name, password);
+            return userRepository.Update(user);
         }
     }
 }

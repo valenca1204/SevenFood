@@ -1,14 +1,8 @@
 ﻿using SevenFoodApp.Controller;
 using SevenFoodApp.Interfaces;
 using SevenFoodApp.Model;
-using SevenFoodApp.Repository;
 using SevenFoodApp.Util;
-using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace SevenFoodApp.View
 {
@@ -17,66 +11,132 @@ namespace SevenFoodApp.View
         int small = (int)Enums.ColumnSize.small;
         int medium = (int)Enums.ColumnSize.medium;
         int large = (int)Enums.ColumnSize.large;
-        
-        private UserController controller;
 
-        public bool add()
+        private UserController controller = new UserController();
+
+        public void Add()
         {
             try
             {
+                Console.WriteLine("CADASTRAR NOVO USUÁRIO\n");
                 Console.Write("Nome: ");
                 string name = Console.ReadLine() ?? "Nome não Informado";
-                return this.controller.Add(name);
-
-            } catch (Exception ex)
+                
+                if (this.controller.Add(name))
+                    Console.WriteLine("Usuario Cadastrado com sucesso.");
+                else
+                    Console.WriteLine("Erro de errado não está certo :(");
+            }
+            catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
-                return false;
             }
         }
 
-        public bool remove()
+        public void Remove()
         {
-            throw new NotImplementedException();
-        }
+            Console.WriteLine("PESQUISAR PELO ID");
+            Console.Write("Nº ID: ");
+            string? idString = Console.ReadLine();
+            int id = 0;
 
-        public void show(User obj)
-        {
-            Console.WriteLine($"Id   : {obj.Id}");
-            Console.WriteLine($"Nome : {obj.Name}");
-            Console.WriteLine($"Senha: {obj.Password}");
-        }
-
-        public void show()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void showAll(List<User> users)
-        {
-            this.showTitle();            
-            foreach (User user in users)
+            if (idString != null)
             {
-                this.showInLine(user);
+                int v = int.Parse(idString);
+                id = v;
+            }
+
+            if (controller.remove(id))
+                Console.WriteLine("Usuario Removido com sucesso.");
+            else
+                Console.WriteLine("Erro de errado não está certo :(");
+        }
+
+        public void Show()
+        {
+            Console.WriteLine("PESQUISAR PELO ID");
+            Console.Write("Nº ID: ");
+            string? idString = Console.ReadLine();
+            int id = 0;
+
+            if (idString != null)
+            {
+                int v = int.Parse(idString);
+                id = v;
+            }
+
+            User? obj = controller.getById(id);
+
+            if (obj != null)
+            {
+                Console.WriteLine("CADASTRO DO USUÁRIO\n");
+                Console.WriteLine($"Id   : {obj.Id}");
+                Console.WriteLine($"Nome : {obj.Name}");
+                Console.WriteLine($"Senha: {obj.Password}");
+            }
+            else
+            {
+                Console.WriteLine($"Usuário não existe para o id {id}");
             }
         }
 
-        public void showAll()
+        public void ShowAll()
         {
-            throw new NotImplementedException();
+            this.ShowTitle();
+            foreach (User user in controller.getAll())
+            {
+                this.ShowInLine(user);
+            }
         }
 
-        private void showInLine(User user)
+        public void Update()
         {
-            
-            
+            Console.WriteLine("PESQUISAR PELO ID");
+            Console.Write("Nº ID: ");
+            string? idString = Console.ReadLine();
+            int id = 0;
+
+            if (idString != null)
+            {
+                int v = int.Parse(idString);
+                id = v;
+            }
+
+            User? obj = controller.getById(id);
+
+            if (obj != null)
+            {
+                Console.WriteLine("CADASTRO DO USUÁRIO\n");
+                Console.WriteLine($"Id   : {obj.Id}");
+                Console.WriteLine($"Nome : {obj.Name}");
+                Console.WriteLine($"Senha: {obj.Password}");
+            }
+            else
+            {
+                Console.WriteLine($"Usuário não existe para o id {id}");
+            }
+
+            Console.WriteLine("ATUALIZE OS DADOS DO USUÁRIO");
+            Console.Write("Nome: ");
+            string name = Console.ReadLine() ?? "Nome não Informado";
+            Console.Write("Seha: ");
+            string password = Console.ReadLine() ?? "Senha não Informada";
+
+            if (controller.update(id, name, password))
+                Console.WriteLine("Usuario Atualizado com sucesso.");
+            else
+                Console.WriteLine("Erro de errado não está certo :(");
+        }
+
+        private void ShowInLine(User user)
+        {
             Console.Write($"{user.Id.ToString().PadRight(this.small)}");
             Console.Write($"{user.Name.PadRight(this.large)[..(this.large - 1)]} ");
             Console.Write($"{user.Password.PadRight(this.medium)}");
             Console.WriteLine("");
         }
 
-        private void showTitle()
+        private void ShowTitle()
         {
             int totalSize = this.small + this.medium + this.large;
             Console.WriteLine($"".PadRight(totalSize, '-'));
@@ -84,7 +144,6 @@ namespace SevenFoodApp.View
             Console.Write($"NOME".PadRight(this.large));
             Console.WriteLine($"SENHA".PadRight(this.medium));
             Console.WriteLine($"".PadRight(totalSize, '-'));
-
         }
     }
 }

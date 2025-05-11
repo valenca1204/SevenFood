@@ -8,10 +8,12 @@ namespace SevenFoodApp.Interfaces
 {
     internal interface IView
     {
-        bool add();
-        void show();
-        void showAll();
-        bool remove();
+        void Add();
+        void Show();
+        void ShowAll();
+        void Remove();
+
+        void Update();
 
 
     }

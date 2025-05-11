@@ -8,10 +8,10 @@ namespace SevenFoodApp.Interfaces
 {
     internal interface IRepository<T>
     {
-        T GetById(int id);
-        T GetAll();
+        T? GetById(int id);
+        List<T> GetAll();
         bool Update(T entity);
         bool Delete(int id);
-        void Insert(T entity);
+        bool Insert(T entity);
     }
 }
