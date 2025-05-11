@@ -4,5 +4,6 @@
 
 /.vs
 /SevenFoodApp/bin/Debug/net8.0
+/SevenFoodApp/bin/Release/net8.0
 /SevenFoodApp/.vs/SevenFoodApp
 /SevenFoodApp/obj
