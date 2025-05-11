@@ -15,25 +15,54 @@ namespace SevenFoodApp.View
             USER = 1,
         }
 
-        public static void Main()
+        public enum USER : int
         {
-            // Console.Clear();
-            Console.WriteLine("Bem Vindo do 7Food");
-            Console.WriteLine();
-            Console.WriteLine("1 - Usuário");
-            Console.WriteLine($"{(int)CODE.EXIT} - Sair");
+            BACK = 0,
+            GET_BY_ID = 1,
+            GET_ALL = 2,
+            INSERT = 3,
+            UPDATE = 4,
+            DELETE = 5,
         }
 
-        public static CODE GetOption(string message) {
-            CODE option;
+        public static void Begin()
+        {
+            Console.Clear();
+            Console.WriteLine("-------------------------------------");
+            Console.WriteLine(">>> Bem Vindo do 7Food <<<");
+            Console.WriteLine("-------------------------------------");
+            Console.WriteLine();
+            Console.WriteLine($"{(int)CODE.USER} - Usuário");
+            Console.WriteLine($"{(int)CODE.EXIT} - Sair");
+            Console.WriteLine("-------------------------------------");
+        }
+
+        public static void User()
+        {
+            Console.Clear();
+            Console.WriteLine("-------------------------------------");
+            Console.WriteLine(">>> USUÁRIO <<<");
+            Console.WriteLine("-------------------------------------");
+            Console.WriteLine();
+            Console.WriteLine($"{(int)USER.GET_BY_ID} - Buscar pelo ID ");
+            Console.WriteLine($"{(int)USER.GET_ALL} - Listar todos");
+            Console.WriteLine($"{(int)USER.INSERT} - Cadastrar um novo usuário");
+            Console.WriteLine($"{(int)USER.UPDATE} - Atualizar");
+            Console.WriteLine($"{(int)USER.DELETE} - Apagar");
+            Console.WriteLine($"{(int)USER.BACK} - Voltar");
+            Console.WriteLine("-------------------------------------");
+        }
+
+        public static T GetOption<T>(string message) {
+            T option;
             try
             {
                 Console.WriteLine(message);
-                option = (CODE) Enum.Parse(typeof(CODE), Console.ReadLine() ?? "0");
+                option = (T) Enum.Parse(typeof(T), Console.ReadLine() ?? "0");
             }
             catch
             {
-                option = CODE.EXIT;
+                option = (T) Enum.Parse(typeof(T), "0");
             } 
             return option;
         }

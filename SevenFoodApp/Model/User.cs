@@ -8,7 +8,7 @@ namespace SevenFoodApp.Model
 {
     internal class User : People
     {
-        public User(string name, string password) : base(name, password) { }
+        public User(int id, string name, string password) : base(id, name, password) { }
 
     }
 }
