@@ -1,11 +1,11 @@
-﻿using SevenFoodApp.Model;
-using SevenFoodApp.View;
-using System.ComponentModel;
+﻿using SevenFoodApp.View;
 
 UserView userView = new UserView();
-List<User> users = new List<User>();
 
 bool hasContinue = true;
+
+
+userView.Login();
 
 while (hasContinue)
 {
@@ -31,7 +31,7 @@ while (hasContinue)
                         userView.ShowAll();
                         break;
                     case Menu.USER.INSERT:
-                        userView.Add();                            
+                        userView.Add();
                         break;
                     case Menu.USER.DELETE:
                         userView.Remove();

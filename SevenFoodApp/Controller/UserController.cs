@@ -14,7 +14,7 @@ namespace SevenFoodApp.Controller
             User user = new User(id, name, password);
             return userRepository.Insert(user);
         }
-        
+
         private string BuilderRandomPassword()
         {
             const string UPPER = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -25,14 +25,14 @@ namespace SevenFoodApp.Controller
             var caracteres = new List<string>([UPPER, LOWWER, SPECIAL, DIGIT]);
             string password = "";
             Random index_randomic = new Random();
-            
+
             for (int i = 0; i < 8; i++)
             {
                 int index_type = index_randomic.Next(0, 4);
                 int index_caractere = index_randomic.Next(0, caracteres[index_type].Length);
                 char caracter_random = caracteres[index_type][index_caractere];
                 password += caracter_random;
-            }            
+            }
             return password;
         }
 
@@ -62,6 +62,21 @@ namespace SevenFoodApp.Controller
         {
             User user = new User(id, name, password);
             return userRepository.Update(user);
+        }
+
+        internal bool Loggin(string id, string password)
+        {
+            try
+            {
+                int _id = int.Parse(id);
+                return userRepository.Loggin(_id, password);
+            }
+            catch
+            {
+                return false;
+
+            }
+
         }
     }
 }
