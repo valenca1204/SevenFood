@@ -69,7 +69,8 @@ namespace SevenFoodApp.Controller
             try
             {
                 int _id = int.Parse(id);
-                return userRepository.Loggin(_id, password);
+                User user = userRepository.GetById(_id)!;
+                return user != null && user.Password == password;
             }
             catch
             {
