@@ -1,4 +1,8 @@
-﻿using SevenFoodApp.View;
+﻿using SevenFoodApp.Repository;
+using SevenFoodApp.View;
+using static SevenFoodApp.Util.Enums;
+
+UserRepository.startFileUsers();
 
 UserView userView = new UserView();
 
@@ -11,35 +15,35 @@ while (hasContinue)
 {
     bool hasBack = false;
     Menu.Begin();
-    Menu.CODE option = Menu.GetOption<Menu.CODE>("Escolha uma opção");
+    CODE option = Menu.GetOption<CODE>("Escolha uma opção");
 
     switch (option)
     {
-        case Menu.CODE.USER:
+        case CODE.USER:
 
             while (!hasBack)
             {
                 Menu.User();
-                Menu.USER optUser = Menu.GetOption<Menu.USER>("Escolha uma opção");
+                USER optUser = Menu.GetOption<USER>("Escolha uma opção");
 
                 switch (optUser)
                 {
-                    case Menu.USER.GET_BY_ID:
-                        userView.Show();
+                    case USER.GET_BY_ID:
+                        userView.ShowById();
                         break;
-                    case Menu.USER.GET_ALL:
+                    case USER.GET_ALL:
                         userView.ShowAll();
                         break;
-                    case Menu.USER.INSERT:
+                    case USER.INSERT:
                         userView.Add();
                         break;
-                    case Menu.USER.DELETE:
+                    case USER.DELETE:
                         userView.Remove();
                         break;
-                    case Menu.USER.UPDATE:
+                    case USER.UPDATE:
                         userView.Update();
                         break;
-                    case Menu.USER.BACK:
+                    case USER.BACK:
                     default:
                         hasBack = true;
                         break;
@@ -49,7 +53,7 @@ while (hasContinue)
                     Console.ReadKey();
             }
             break;
-        case Menu.CODE.EXIT:
+        case CODE.EXIT:
         default:
             hasContinue = false;
             break;
@@ -71,7 +75,7 @@ while (hasContinue)
     // hasContinue = HasContinue(option);
 }
 
-//bool HasContinue(Menu.CODE option)
+//bool HasContinue(CODE option)
 //{
 //    return !Menu.GetCodeExit().Equals(option);
 //}

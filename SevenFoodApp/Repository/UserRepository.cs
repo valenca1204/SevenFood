@@ -1,5 +1,6 @@
 ﻿using SevenFoodApp.Interfaces;
 using SevenFoodApp.Model;
+using static SevenFoodApp.Util.Enums;
 
 namespace SevenFoodApp.Repository
 {
@@ -9,11 +10,7 @@ namespace SevenFoodApp.Repository
         private const string PATH_FILE_USER = "users.txt";
 
         public UserRepository() {
-            if (!File.Exists(PATH_FILE_ID))            
-                File.WriteAllText(PATH_FILE_ID, "1");
-
-            if (!File.Exists(PATH_FILE_USER))
-                File.WriteAllText(PATH_FILE_USER, "1,Dudats,admin");
+            startFileUsers();
         }
         public int getLastId()
         {
@@ -30,7 +27,7 @@ namespace SevenFoodApp.Repository
         {
             try
             {
-                File.AppendAllText(PATH_FILE_USER, $"{entity.Id},{entity.Name},{entity.Password}\n");
+                File.AppendAllText(PATH_FILE_USER, $"{entity.Id},{entity.Name},{entity.Password},{(int)entity.Type}\n");
                 this.setLastId(entity.Id);
                 return true;
             } catch
@@ -148,7 +145,8 @@ namespace SevenFoodApp.Repository
                 int id = int.Parse(values[0]);
                 string name = values[1];
                 string password = values[2];
-                User user = new User(id, name, password);
+                TYPE_USER type = (TYPE_USER) int.Parse(values[3]);
+                User user = new User(id, name, password, type);
                 return user;
             }
             catch (Exception ex)
@@ -161,7 +159,17 @@ namespace SevenFoodApp.Repository
 
         private string toString(User user)
         {
-            return $"{user.Id},{user.Name},{user.Password}";
+            return $"{user.Id},{user.Name},{user.Password},{(int)user.Type}";
+        }
+
+        public static void startFileUsers()
+        {
+
+            if (!File.Exists(PATH_FILE_ID))
+                File.WriteAllText(PATH_FILE_ID, "1");
+
+            if (!File.Exists(PATH_FILE_USER))
+                File.WriteAllText(PATH_FILE_USER, "1,Dudats,admin,0\n");
         }
     }
 }

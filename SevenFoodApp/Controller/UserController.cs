@@ -1,5 +1,6 @@
 ﻿using SevenFoodApp.Model;
 using SevenFoodApp.Repository;
+using static SevenFoodApp.Util.Enums;
 
 namespace SevenFoodApp.Controller
 {
@@ -7,11 +8,11 @@ namespace SevenFoodApp.Controller
     {
         private UserRepository userRepository = new UserRepository();
 
-        public bool Add(string name)
+        public bool Add(string name, TYPE_USER type)
         {
             int id = this.GetNextId();
             string password = this.BuilderRandomPassword();
-            User user = new User(id, name, password);
+            User user = new User(id, name, password, type);
             return userRepository.Insert(user);
         }
 
@@ -58,9 +59,9 @@ namespace SevenFoodApp.Controller
             return userRepository.Delete(id);
         }
 
-        internal bool update(int id, string name, string password)
+        internal bool update(int id, string name, string password, TYPE_USER type = TYPE_USER.Client)
         {
-            User user = new User(id, name, password);
+            User user = new User(id, name, password, type);
             return userRepository.Update(user);
         }
 
