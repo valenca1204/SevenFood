@@ -10,9 +10,32 @@ namespace SevenFoodApp.Util
     {
         public enum ColumnSize : int
         {
-            small = 7,
-            medium = 15,
-            large = 30
+            SMALL = 7,
+            MEDIUM = 15,
+            LARGE = 30
+        }
+
+        public enum CODE : int
+        {
+            EXIT = 0,
+            USER = 1,
+        }
+
+        public enum USER : int
+        {
+            BACK = 0,
+            GET_BY_ID = 1,
+            GET_ALL = 2,
+            INSERT = 3,
+            UPDATE = 4,
+            DELETE = 5,
+        }
+
+        public enum TYPE_USER : int
+        {
+            Admin = 0,
+            Owner = 1,
+            Client = 2,
         }
     }
 }
