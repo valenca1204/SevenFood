@@ -55,7 +55,6 @@ namespace SevenFoodApp.Repository
                 Console.WriteLine(ex.Message);
                 return null;
             }
-
         }
 
         public List<User> GetAll()

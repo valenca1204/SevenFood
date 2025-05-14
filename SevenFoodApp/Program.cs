@@ -5,6 +5,7 @@ using static SevenFoodApp.Util.Enums;
 UserRepository.startFileUsers();
 
 UserView userView = new UserView();
+RestaurantView restaurantView = new RestaurantView();
 
 bool hasContinue = true;
 
@@ -44,6 +45,40 @@ while (hasContinue)
                         userView.Update();
                         break;
                     case USER.BACK:
+                    default:
+                        hasBack = true;
+                        break;
+
+                }
+                if (!hasBack)
+                    Console.ReadKey();
+            }
+            break;
+        case CODE.RESTAURANT:
+
+            while (!hasBack)
+            {
+                Menu.Restaurant();
+                RESTAURANT optRestaurant = Menu.GetOption<RESTAURANT>("Escolha uma opção");
+
+                switch (optRestaurant)
+                {
+                    case RESTAURANT.GET_BY_ID:
+                        restaurantView.ShowById();
+                        break;
+                    case RESTAURANT.GET_ALL:
+                        restaurantView.ShowAll();
+                        break;
+                    case RESTAURANT.INSERT:
+                        restaurantView.Add();
+                        break;
+                    case RESTAURANT.DELETE:
+                        restaurantView.Remove();
+                        break;
+                    case RESTAURANT.UPDATE:
+                        restaurantView.Update();
+                        break;
+                    case RESTAURANT.BACK:
                     default:
                         hasBack = true;
                         break;
