@@ -17,7 +17,8 @@ namespace SevenFoodApp.View
             Console.WriteLine(">>> Bem Vindo do 7Food <<<");
             Console.WriteLine("-------------------------------------");
             Console.WriteLine();
-            Console.WriteLine($"{(int)CODE.USER} - Usuário");
+            Console.WriteLine($"{(int)CODE.USER} - Usuários");
+            Console.WriteLine($"{(int)CODE.RESTAURANT} - Restaurantes");
             Console.WriteLine($"{(int)CODE.EXIT} - Sair");
             Console.WriteLine("-------------------------------------");
         }
@@ -31,7 +32,23 @@ namespace SevenFoodApp.View
             Console.WriteLine();
             Console.WriteLine($"{(int)USER.GET_BY_ID} - Buscar pelo ID ");
             Console.WriteLine($"{(int)USER.GET_ALL} - Listar todos");
-            Console.WriteLine($"{(int)USER.INSERT} - Cadastrar um novo usuário");
+            Console.WriteLine($"{(int)USER.INSERT} - Cadastrar");
+            Console.WriteLine($"{(int)USER.UPDATE} - Atualizar");
+            Console.WriteLine($"{(int)USER.DELETE} - Apagar");
+            Console.WriteLine($"{(int)USER.BACK} - Voltar");
+            Console.WriteLine("-------------------------------------");
+        }
+
+        public static void Restaurant()
+        {
+            Console.Clear();
+            Console.WriteLine("-------------------------------------");
+            Console.WriteLine(">>> RESTAURANTE <<<");
+            Console.WriteLine("-------------------------------------");
+            Console.WriteLine();
+            Console.WriteLine($"{(int)USER.GET_BY_ID} - Buscar pelo ID ");
+            Console.WriteLine($"{(int)USER.GET_ALL} - Listar todos");
+            Console.WriteLine($"{(int)USER.INSERT} - Cadastrar");
             Console.WriteLine($"{(int)USER.UPDATE} - Atualizar");
             Console.WriteLine($"{(int)USER.DELETE} - Apagar");
             Console.WriteLine($"{(int)USER.BACK} - Voltar");

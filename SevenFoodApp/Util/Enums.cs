@@ -19,9 +19,20 @@ namespace SevenFoodApp.Util
         {
             EXIT = 0,
             USER = 1,
+            RESTAURANT = 2,
         }
 
         public enum USER : int
+        {
+            BACK = 0,
+            GET_BY_ID = 1,
+            GET_ALL = 2,
+            INSERT = 3,
+            UPDATE = 4,
+            DELETE = 5,
+        }
+
+        public enum RESTAURANT : int
         {
             BACK = 0,
             GET_BY_ID = 1,
