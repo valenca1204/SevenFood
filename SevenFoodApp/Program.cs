@@ -1,14 +1,11 @@
 ﻿using SevenFoodApp.Repository;
+using SevenFoodApp.Util;
 using SevenFoodApp.View;
 using static SevenFoodApp.Util.Enums;
 
-UserRepository.startFileUsers();
-
-UserView userView = new UserView();
-RestaurantView restaurantView = new RestaurantView();
-
+Please.StartDataBase();
 bool hasContinue = true;
-
+UserView userView = new UserView();
 
 userView.Login();
 
@@ -16,12 +13,11 @@ while (hasContinue)
 {
     bool hasBack = false;
     Menu.Begin();
-    CODE option = Menu.GetOption<CODE>("Escolha uma opção");
+    CONTEXT option = Menu.GetOption<CONTEXT>("Escolha uma opção");
 
     switch (option)
     {
-        case CODE.USER:
-
+        case CONTEXT.USER:
             while (!hasBack)
             {
                 Menu.User();
@@ -30,6 +26,7 @@ while (hasContinue)
                 switch (optUser)
                 {
                     case USER.GET_BY_ID:
+
                         userView.ShowById();
                         break;
                     case USER.GET_ALL:
@@ -54,8 +51,8 @@ while (hasContinue)
                     Console.ReadKey();
             }
             break;
-        case CODE.RESTAURANT:
-
+        case CONTEXT.RESTAURANT:
+            RestaurantView restaurantView = new RestaurantView();
             while (!hasBack)
             {
                 Menu.Restaurant();
@@ -82,13 +79,12 @@ while (hasContinue)
                     default:
                         hasBack = true;
                         break;
-
                 }
                 if (!hasBack)
                     Console.ReadKey();
             }
             break;
-        case CODE.EXIT:
+        case CONTEXT.EXIT:
         default:
             hasContinue = false;
             break;
@@ -104,13 +100,4 @@ while (hasContinue)
         Console.Clear();
         Console.WriteLine("Valeu Prezadinhos...\nAqui é Barril Dobrado, pai!!!");
     }
-
-
-
-    // hasContinue = HasContinue(option);
 }
-
-//bool HasContinue(CODE option)
-//{
-//    return !Menu.GetCodeExit().Equals(option);
-//}

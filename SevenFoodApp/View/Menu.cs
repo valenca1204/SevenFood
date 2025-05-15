@@ -17,9 +17,9 @@ namespace SevenFoodApp.View
             Console.WriteLine(">>> Bem Vindo do 7Food <<<");
             Console.WriteLine("-------------------------------------");
             Console.WriteLine();
-            Console.WriteLine($"{(int)CODE.USER} - Usuários");
-            Console.WriteLine($"{(int)CODE.RESTAURANT} - Restaurantes");
-            Console.WriteLine($"{(int)CODE.EXIT} - Sair");
+            Console.WriteLine($"{(int)CONTEXT.USER} - Usuários");
+            Console.WriteLine($"{(int)CONTEXT.RESTAURANT} - Restaurantes");
+            Console.WriteLine($"{(int)CONTEXT.EXIT} - Sair");
             Console.WriteLine("-------------------------------------");
         }
 
@@ -69,6 +69,6 @@ namespace SevenFoodApp.View
             return option;
         }
 
-        public static CODE GetCodeExit() => CODE.EXIT;
+        public static CONTEXT GetCodeExit() => CONTEXT.EXIT;
     }
 }

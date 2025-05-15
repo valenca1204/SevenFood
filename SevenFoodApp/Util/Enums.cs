@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SevenFoodApp.Util
 {
-    internal class Enums
+    public class Enums
     {
         public enum ColumnSize : int
         {
@@ -15,7 +15,7 @@ namespace SevenFoodApp.Util
             LARGE = 30
         }
 
-        public enum CODE : int
+        public enum CONTEXT : int
         {
             EXIT = 0,
             USER = 1,

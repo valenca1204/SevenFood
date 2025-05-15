@@ -9,7 +9,7 @@ using static SevenFoodApp.Util.Enums;
 
 namespace SevenFoodApp.Repository
 {
-    internal class RestaurantRepository : IRepository<Restaurant>
+    internal class RestaurantRepository //: //IRepository<Restaurant>
     {
         private const string PATH_FILE_ID = "ids.txt";
         private const string PATH_FILE_RESTAURANT = "restaurants.txt";

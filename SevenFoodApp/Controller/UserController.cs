@@ -1,12 +1,13 @@
 ﻿using SevenFoodApp.Model;
 using SevenFoodApp.Repository;
+using SevenFoodApp.Util;
 using static SevenFoodApp.Util.Enums;
 
 namespace SevenFoodApp.Controller
 {
     internal class UserController
     {
-        private UserRepository userRepository = new UserRepository();
+        private UserRepository userRepository = new UserRepository(CONTEXT.USER);
 
         public bool Add(string name, TYPE_USER type)
         {
@@ -41,7 +42,7 @@ namespace SevenFoodApp.Controller
 
         private int GetNextId()
         {
-            return userRepository.getLastId() + 1;
+            return Please.GetNextId();
         }
 
         public List<User> getAll()
@@ -65,7 +66,7 @@ namespace SevenFoodApp.Controller
             return userRepository.Update(user);
         }
 
-        internal bool Loggin(string id, string password)
+        public bool Loggin(string id, string password)
         {
             try
             {

@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace SevenFoodApp.Model
 {
-    internal class Restaurant
+    internal class Restaurant : AModel
     {
-        public int Id { get; set; }
+        // public int Id { get; set; }
         public string Name { get; set; }
         public bool Active { get; set; }
 
-        public Restaurant(int id, string name, bool active = true) { 
-            this.Id = id;
+        public Restaurant(int id, string name, bool active = true) : base(id) { 
+            //this.Id = id;
             this.Name = name;
             this.Active = active;
         }
