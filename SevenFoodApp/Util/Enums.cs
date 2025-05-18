@@ -8,11 +8,13 @@ namespace SevenFoodApp.Util
 {
     public static class Enums
     {
-        public enum ColumnSize : int
+        public enum SIZE : int
         {
-            SMALL = 10,
-            MEDIUM = 20,
-            LARGE = 30
+            FIVE = 5,
+            TEN = 10,
+            FIFTEEN = 15,
+            TWENTY = 20,
+            THIRTY = 30
         }
 
         public enum CONTEXT : int

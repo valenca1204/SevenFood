@@ -6,15 +6,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static SevenFoodApp.Util.Enums;
 
 namespace SevenFoodApp.View
 {
     internal class FoodView : IView
     {
-        int small = (int)Enums.ColumnSize.SMALL;
-        int medium = (int)Enums.ColumnSize.MEDIUM;
-        int large = (int)Enums.ColumnSize.LARGE;
-
         FoodController controller = new FoodController();
 
         public void Add()
@@ -106,34 +103,34 @@ namespace SevenFoodApp.View
             if (obj != null)
             {
                 Console.WriteLine("CADASTRO DA COMIDA\n");
-                Console.WriteLine($"Restaurante: {obj["restaurant"]}");
-                Console.WriteLine($"Id         : {obj["id"]}");
-                Console.WriteLine($"Descrição  : {obj["description"]}");
-                Console.WriteLine($"Preço      : {obj["price"]}");
-                Console.WriteLine($"Disponível : {obj["status"]}");
+                Console.WriteLine($"Restaurante : {obj["restaurant"]}");
+                Console.WriteLine($"Id          : {obj["id"]}");
+                Console.WriteLine($"Descrição   : {obj["description"]}");
+                Console.WriteLine($"Preço       : {obj["price"]}");
+                Console.WriteLine($"Ativo       : {obj["status"]}");
             }
 
         }
 
         private void ShowInLine(Dictionary<string, string> obj)
         {
-            Console.Write($"{obj["id"].ToString().PadRight(this.small)}");
-            Console.Write($"{obj["description"].PadRight(this.large)[..(this.large - 1)]} ");
-            Console.Write($"{obj["price"].PadRight(this.small)}");
-            Console.Write($"{obj["status"].PadRight(this.medium)}");
-            Console.Write($"{obj["restaurant"].PadRight(this.medium)}");
+            Console.Write($"{obj["id"].ToString().PadRight((int)SIZE.FIVE)}");
+            Console.Write($"{obj["description"].PadRight((int)SIZE.THIRTY)[..((int)SIZE.THIRTY - 1)]} ");
+            Console.Write($"{obj["price"].PadRight((int)SIZE.FIFTEEN)}");
+            Console.Write($"{obj["status"].PadRight((int)SIZE.TEN)}");
+            Console.Write($"{obj["restaurant"].PadRight((int)SIZE.TWENTY)}");
             Console.WriteLine("");
         }
 
         private void ShowTitle()
         {
-            int totalSize = this.small*2 + (this.medium * 2) + this.large;
+            int totalSize = (int)SIZE.FIVE + (int)SIZE.TEN + (int)SIZE.FIFTEEN + (int)SIZE.THIRTY + (int)SIZE.TWENTY;
             Console.WriteLine($"".PadRight(totalSize, '-'));
-            Console.Write($"ID".PadRight(this.small));
-            Console.Write($"DESCRIPTION".PadRight(this.large));
-            Console.Write($"PREÇO".PadRight(this.small));
-            Console.Write($"DISPONÍVEL".PadRight(this.medium));
-            Console.Write($"RESTAURANTE".PadRight(this.medium));
+            Console.Write($"ID".PadRight((int)SIZE.FIVE));
+            Console.Write($"DESCRIPTION".PadRight((int)SIZE.THIRTY));
+            Console.Write($"PREÇO".PadRight((int)SIZE.FIFTEEN));
+            Console.Write($"ATIVO".PadRight((int)SIZE.TEN));
+            Console.Write($"RESTAURANTE".PadRight((int)SIZE.TWENTY));
             Console.WriteLine($"\n--".PadRight(totalSize, '-'));
         }
 

@@ -97,7 +97,7 @@ namespace SevenFoodApp.Controller
                 {
                     { "id", food.Id.ToString() },
                     { "description",  food.Description },
-                    { "price",  food.Price.ToString() },
+                    { "price",  food.Price.ToString("C2") },
                     { "restaurant",  $"{food.Restaurant.Id} - {food.Restaurant.Name}" },
                     { "idRestaurant",  food.Restaurant.Id.ToString() },
                     { "status", Please.TranslateFromBool(food.Status) },

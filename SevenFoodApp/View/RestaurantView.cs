@@ -13,10 +13,6 @@ namespace SevenFoodApp.View
 {
     internal class RestaurantView : IView
     {
-        int small = (int)Enums.ColumnSize.SMALL;
-        int medium = (int)Enums.ColumnSize.MEDIUM;
-        int large = (int)Enums.ColumnSize.LARGE;
-        
         RestaurantController controller = new RestaurantController();
         
         public void Add()
@@ -86,9 +82,10 @@ namespace SevenFoodApp.View
             if (obj != null)
             {
                 Console.WriteLine("CADASTRO DO RESTAURANTE\n");
-                Console.WriteLine($"Id   : {obj["id"]}");
-                Console.WriteLine($"Nome : {obj["name"]}");
-                Console.WriteLine($"Ativo: {obj["active"]}");
+                Console.WriteLine($"Id    : {obj["id"]}");
+                Console.WriteLine($"Nome  : {obj["name"]}");
+                Console.WriteLine($"Senha : {obj["password"]}");
+                Console.WriteLine($"Ativo : {obj["active"]}");
             }
 
         }
@@ -157,19 +154,19 @@ namespace SevenFoodApp.View
 
         private void ShowInLine(Dictionary<string, string> obj)
         {
-            Console.Write($"{obj["id"].ToString().PadRight(this.small)}");
-            Console.Write($"{obj["name"].PadRight(this.large)[..(this.large - 1)]} ");
-            Console.Write($"{obj["active"].PadRight(this.medium)}");
+            Console.Write($"{obj["id"].ToString().PadRight((int)SIZE.FIVE)}");
+            Console.Write($"{obj["name"].PadRight((int)SIZE.THIRTY)[..((int)SIZE.THIRTY - 1)]} ");
+            Console.Write($"{obj["active"].PadRight((int)SIZE.FIFTEEN)}");
             Console.WriteLine("");
         }
 
         private void ShowTitle()
         {
-            int totalSize = this.small + (this.medium * 2) + this.large;
+            int totalSize = (int)SIZE.FIVE + (int)SIZE.TEN + (int)SIZE.THIRTY;
             Console.WriteLine($"".PadRight(totalSize, '-'));
-            Console.Write($"ID".PadRight(this.small));
-            Console.Write($"NOME".PadRight(this.large));
-            Console.WriteLine($"ATIVO".PadRight(this.medium));
+            Console.Write($"ID".PadRight((int)SIZE.FIVE));
+            Console.Write($"NOME".PadRight((int)SIZE.THIRTY));
+            Console.WriteLine($"ATIVO".PadRight((int)SIZE.TEN));
             Console.WriteLine($"".PadRight(totalSize, '-'));
         }
     }

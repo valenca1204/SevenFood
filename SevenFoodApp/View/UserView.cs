@@ -9,10 +9,6 @@ namespace SevenFoodApp.View
 {
     internal class UserView : IView
     {
-        int small = (int)Enums.ColumnSize.SMALL;
-        int medium = (int)Enums.ColumnSize.MEDIUM;
-        int large = (int)Enums.ColumnSize.LARGE;
-
         private UserController controller = new UserController();
 
         public void Add()
@@ -82,10 +78,10 @@ namespace SevenFoodApp.View
             if (obj != null)
             {
                 Console.WriteLine("CADASTRO DO USUÁRIO\n");
-                Console.WriteLine($"Id   : {obj["id"]}");
-                Console.WriteLine($"Nome : {obj["name"]}");
-                Console.WriteLine($"Senha: {obj["password"]}");
-                Console.WriteLine($"Tipo: {obj["type"]}");
+                Console.WriteLine($"Id    : {obj["id"]}");
+                Console.WriteLine($"Nome  : {obj["name"]}");
+                Console.WriteLine($"Senha : {obj["password"]}");
+                Console.WriteLine($"Tipo  : {obj["type"]}");
             }
 
         }
@@ -150,25 +146,23 @@ namespace SevenFoodApp.View
 
         private void ShowInLine(Dictionary<string, string> obj)
         {
-            Console.Write($"{obj["id"].ToString().PadRight(this.small)}");
-            Console.Write($"{obj["name"].PadRight(this.large)[..(this.large - 1)]} ");
-            Console.Write($"{obj["password"].PadRight(this.medium)}");
-            Console.Write($"{obj["type"].ToString().PadRight(this.medium)}");
+            Console.Write($"{obj["id"].ToString().PadRight((int)SIZE.FIVE)}");
+            Console.Write($"{obj["name"].PadRight((int)SIZE.THIRTY)[..((int)SIZE.THIRTY - 1)]} ");
+            Console.Write($"{obj["password"].PadRight((int)SIZE.FIFTEEN)}");
+            Console.Write($"{obj["type"].ToString().PadRight((int)SIZE.TWENTY)}");
             Console.WriteLine("");
         }
 
         private void ShowTitle()
         {
-            int totalSize = this.small + (this.medium * 2) + this.large;
+            int totalSize = (int)SIZE.FIVE + (int)SIZE.FIFTEEN + (int)SIZE.THIRTY + (int)SIZE.TWENTY;
             Console.WriteLine($"".PadRight(totalSize, '-'));
-            Console.Write($"ID".PadRight(this.small));
-            Console.Write($"NOME".PadRight(this.large));
-            Console.Write($"SENHA".PadRight(this.medium));
-            Console.WriteLine($"TIPO".PadRight(this.medium));
-            Console.WriteLine($"".PadRight(totalSize, '-'));
+            Console.Write($"ID".PadRight((int)SIZE.FIVE));
+            Console.Write($"NOME".PadRight((int)SIZE.THIRTY));
+            Console.Write($"SENHA".PadRight((int)SIZE.FIFTEEN));
+            Console.Write($"TIPO".PadRight((int)SIZE.TWENTY));
+            Console.WriteLine($"\n".PadRight(totalSize, '-'));
         }
-
-
 
         private TYPE_USER getTypeUser()
         {

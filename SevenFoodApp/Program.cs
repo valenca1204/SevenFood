@@ -6,7 +6,7 @@ using static SevenFoodApp.Util.Enums;
 
 Please.StartDataBase();
 bool hasContinue = true;
-LoginView.Login();
+// LoginView.Login();
 
 while (hasContinue)
 {
