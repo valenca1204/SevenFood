@@ -8,7 +8,14 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="bin\Release\net8.0\" />
+    <Compile Remove="bin\Release\**" />
+    <EmbeddedResource Remove="bin\Release\**" />
+    <None Remove="bin\Release\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="bin\Releases\SevenFoodApp_1.0.exe" />
+    <None Include="bin\Releases\SevenFoodApp_1.1.exe" />
   </ItemGroup>
 
 </Project>

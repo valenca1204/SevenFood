@@ -26,7 +26,7 @@ namespace SevenFoodApp.View
                 if (this.controller.Add(name, TYPE_USER.Client))
                     Console.WriteLine("Usuario Cadastrado com sucesso.");
                 else
-                    Console.WriteLine("Erro de errado não está certo :(");
+                    Console.WriteLine(Please.GetMessageGenericError());
             }
             catch (Exception ex)
             {
@@ -50,7 +50,7 @@ namespace SevenFoodApp.View
             if (controller.remove(id))
                 Console.WriteLine("Usuario Removido com sucesso.");
             else
-                Console.WriteLine("Erro de errado não está certo :(");
+                Console.WriteLine(Please.GetMessageGenericError());
         }
 
         public void ShowById()
@@ -66,7 +66,7 @@ namespace SevenFoodApp.View
                 id = v;
             }
 
-            User? obj = controller.getById(id);
+            var obj = controller.getById(id);
 
             if (obj != null)
             {
@@ -77,14 +77,15 @@ namespace SevenFoodApp.View
                 Console.WriteLine($"Usuário não existe para o id {id}");
             }
         }
-        public void Show(User obj)
+        public void Show(Dictionary<string, string> obj)
         {
             if (obj != null)
             {
                 Console.WriteLine("CADASTRO DO USUÁRIO\n");
-                Console.WriteLine($"Id   : {obj.Id}");
-                Console.WriteLine($"Nome : {obj.Name}");
-                Console.WriteLine($"Senha: {obj.Password}");
+                Console.WriteLine($"Id   : {obj["id"]}");
+                Console.WriteLine($"Nome : {obj["name"]}");
+                Console.WriteLine($"Senha: {obj["password"]}");
+                Console.WriteLine($"Tipo: {obj["type"]}");
             }
 
         }
@@ -92,9 +93,14 @@ namespace SevenFoodApp.View
         public void ShowAll()
         {
             this.ShowTitle();
-            foreach (User user in controller.getAll())
+            var objs = controller.getAll();
+
+            if (objs != null && objs.Count() > 0)
             {
-                this.ShowInLine(user);
+                foreach (Dictionary<string, string> obj in objs)
+                {
+                    this.ShowInLine(obj);
+                }
             }
         }
 
@@ -111,7 +117,7 @@ namespace SevenFoodApp.View
                 id = v;
             }
 
-            User? obj = controller.getById(id);
+            Dictionary<string, string>? obj = controller.getById(id);
 
             if (obj != null)
             {
@@ -121,19 +127,20 @@ namespace SevenFoodApp.View
                 Console.Write("Nome: ");
                 string name = Console.ReadLine() ?? "";
 
-                name = name == "" ? obj!.Name : name;
+                name = name == "" ? obj["name"] : name;
 
-                Console.Write("Seha: ");
+                Console.Write("Senha: ");
                 string password = Console.ReadLine() ?? "";
-                password = password == "" ? obj!.Password : password;
+                password = password == "" ? obj["password"] : password;
 
                 TYPE_USER type = this.getTypeUser();
 
 
                 if (controller.update(id, name, password, type))
+
                     Console.WriteLine("Usuario Atualizado com sucesso.");
                 else
-                    Console.WriteLine("Erro de errado não está certo :(");
+                    Console.WriteLine(Please.GetMessageGenericError());
             }
             else
             {
@@ -141,12 +148,12 @@ namespace SevenFoodApp.View
             }
         }
 
-        private void ShowInLine(User user)
+        private void ShowInLine(Dictionary<string, string> obj)
         {
-            Console.Write($"{user.Id.ToString().PadRight(this.small)}");
-            Console.Write($"{user.Name.PadRight(this.large)[..(this.large - 1)]} ");
-            Console.Write($"{user.Password.PadRight(this.medium)}");
-            Console.Write($"{user.Type.ToString().PadRight(this.medium)}");
+            Console.Write($"{obj["id"].ToString().PadRight(this.small)}");
+            Console.Write($"{obj["name"].PadRight(this.large)[..(this.large - 1)]} ");
+            Console.Write($"{obj["password"].PadRight(this.medium)}");
+            Console.Write($"{obj["type"].ToString().PadRight(this.medium)}");
             Console.WriteLine("");
         }
 
@@ -161,32 +168,7 @@ namespace SevenFoodApp.View
             Console.WriteLine($"".PadRight(totalSize, '-'));
         }
 
-        public void Login()
-        {
-            bool canTryLogin = false;
-            string? id;
-            string? password;
-            bool approved = false;
-            do
-            {
-                Console.WriteLine("------------------------");
-                Console.WriteLine("|  >>> SEVEN FOOD <<<  |");
-                Console.WriteLine("------------------------");
-                Console.Write("ID: ");
-                id = Console.ReadLine();
-                Console.Write("Senha: ");
-                password = Console.ReadLine();
 
-                canTryLogin = (id != null) && (password != null);
-                if (canTryLogin)
-                    approved = controller.Loggin(id!, password!);
-
-                if (!approved)
-                    Console.WriteLine("Opa, algo de errado não está certo\nTente novamente");
-
-            } while (canTryLogin && !approved);
-
-        }
 
         private TYPE_USER getTypeUser()
         {
@@ -203,7 +185,7 @@ namespace SevenFoodApp.View
                 is_valid = options.Contains(type);
 
                 if (!is_valid)
-                    Console.WriteLine("Opção Inválida");
+                    Console.WriteLine(Please.GetMessageInvalidOption(true));
 
             } while (!is_valid);
 
