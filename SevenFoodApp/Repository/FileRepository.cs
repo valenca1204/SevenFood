@@ -90,7 +90,7 @@ namespace SevenFoodApp.Repository
         {
             try
             {
-                File.AppendAllText(this.PathContext, $"{entityInString.Replace(";", "")}\n");
+                File.AppendAllText(this.PathContext, $"{entityInString}\n");
                 this.setLastId(id);
                 return true;
             }
@@ -112,7 +112,7 @@ namespace SevenFoodApp.Repository
 
                     if ((obj.Length > 0) && (obj[0].Equals(id.ToString())))
                     {
-                        objects[i] = entityInString.Replace(";", "");
+                        objects[i] = entityInString;
                     }
                 }
                 File.WriteAllLines(this.PathContext, objects);

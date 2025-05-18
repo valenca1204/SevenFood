@@ -24,9 +24,9 @@ namespace SevenFoodApp.View
                 Console.WriteLine("|  >>> SEVEN FOOD <<<  |");
                 Console.WriteLine("------------------------");
                 Console.Write("ID: ");
-                id = Console.ReadLine();
+                id = Please.ConsoleRead();
                 Console.Write("Senha: ");
-                password = Console.ReadLine();
+                password = Please.ConsoleRead();
 
                 canTryLogin = (id != null) && (password != null);
                 if (canTryLogin)

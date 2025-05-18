@@ -93,16 +93,16 @@ namespace SevenFoodApp.Controller
 
         private Dictionary<string, string> castObjectToDictionary(Food food)
         {
-            var restaurantString = new Dictionary<string, string>
+            var foodString = new Dictionary<string, string>
                 {
                     { "id", food.Id.ToString() },
                     { "description",  food.Description },
-                    { "price",  $"R$ {food.Price.ToString()}" },
+                    { "price",  food.Price.ToString() },
                     { "restaurant",  $"{food.Restaurant.Id} - {food.Restaurant.Name}" },
                     { "idRestaurant",  food.Restaurant.Id.ToString() },
                     { "status", Please.TranslateFromBool(food.Status) },
                 };
-            return restaurantString;
+            return foodString;
         }
     }
 }

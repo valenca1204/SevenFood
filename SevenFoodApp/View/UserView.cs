@@ -21,7 +21,7 @@ namespace SevenFoodApp.View
             {
                 Console.WriteLine("CADASTRAR NOVO USUÁRIO\n");
                 Console.Write("Nome: ");
-                string name = Console.ReadLine() ?? "Nome não Informado";
+                string name = Please.ConsoleRead() ?? "Nome não Informado";
 
                 if (this.controller.Add(name, TYPE_USER.Client))
                     Console.WriteLine("Usuario Cadastrado com sucesso.");
@@ -38,7 +38,7 @@ namespace SevenFoodApp.View
         {
             Console.WriteLine("PESQUISAR PELO ID");
             Console.Write("Nº ID: ");
-            string? idString = Console.ReadLine();
+            string? idString = Please.ConsoleRead();
             int id = 0;
 
             if (idString != null)
@@ -57,7 +57,7 @@ namespace SevenFoodApp.View
         {
             Console.WriteLine("PESQUISAR PELO ID");
             Console.Write("Nº ID: ");
-            string? idString = Console.ReadLine();
+            string? idString = Please.ConsoleRead();
             int id = 0;
 
             if (idString != null)
@@ -108,7 +108,7 @@ namespace SevenFoodApp.View
         {
             Console.WriteLine("PESQUISAR PELO ID");
             Console.Write("Nº ID: ");
-            string? idString = Console.ReadLine();
+            string? idString = Please.ConsoleRead();
             int id = 0;
 
             if (idString != null)
@@ -125,12 +125,12 @@ namespace SevenFoodApp.View
 
                 Console.WriteLine("ATUALIZE OS DADOS DO USUÁRIO");
                 Console.Write("Nome: ");
-                string name = Console.ReadLine() ?? "";
+                string name = Please.ConsoleRead() ?? "";
 
                 name = name == "" ? obj["name"] : name;
 
                 Console.Write("Senha: ");
-                string password = Console.ReadLine() ?? "";
+                string password = Please.ConsoleRead() ?? "";
                 password = password == "" ? obj["password"] : password;
 
                 TYPE_USER type = this.getTypeUser();
@@ -181,7 +181,7 @@ namespace SevenFoodApp.View
             do
             {
                 Console.Write("Tipo: ");
-                type = Console.ReadLine()!;
+                type = Please.ConsoleRead()!;
                 is_valid = options.Contains(type);
 
                 if (!is_valid)

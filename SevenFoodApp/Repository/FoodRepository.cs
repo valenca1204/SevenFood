@@ -29,7 +29,7 @@ namespace SevenFoodApp.Repository
                 Restaurant? restaurant = this.restaurantRepository.GetById(idRestaurant);
                 if (restaurant == null)
                 {
-                    throw new Exception("Restaurant Inexistente");
+                    throw new Exception("Comida Inexistente");
                 }
 
                 bool status = bool.Parse(values[4]);

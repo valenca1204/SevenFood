@@ -23,17 +23,17 @@ namespace SevenFoodApp.View
             {
                 Console.WriteLine("CADASTRAR NOVA COMIDA\n");
                 Console.Write("Descrição: ");
-                string description = Console.ReadLine() ?? "Nome não Informado";
+                string description = Please.ConsoleRead() ?? "Nome não Informado";
 
                 Console.Write("Preço: ");
-                double price = double.Parse(Console.ReadLine() ?? "0,0");
+                double price = double.Parse(Please.ConsoleRead() ?? "0,0");
 
-                Console.Write("Descrição: ");
-                int idRestaurant = int.Parse(Console.ReadLine() ?? "0");
+                Console.Write("Restaurante: ");
+                int idRestaurant = int.Parse(Please.ConsoleRead() ?? "0");
 
 
                 if (this.controller.Add(description, price, idRestaurant))
-                    Console.WriteLine("Restaurante Cadastrado com sucesso.");
+                    Console.WriteLine("Comida Cadastrada com sucesso.");
                 else
                     Console.WriteLine(Please.GetMessageGenericError());
             }
@@ -47,7 +47,7 @@ namespace SevenFoodApp.View
         {
             Console.WriteLine("PESQUISAR PELO ID");
             Console.Write("Nº ID: ");
-            string? idString = Console.ReadLine();
+            string? idString = Please.ConsoleRead();
             int id = 0;
 
             if (idString != null)
@@ -80,7 +80,7 @@ namespace SevenFoodApp.View
         {
             Console.WriteLine("PESQUISAR PELO ID");
             Console.Write("Nº ID: ");
-            string? idString = Console.ReadLine();
+            string? idString = Please.ConsoleRead();
             int id = 0;
 
             if (idString != null)
@@ -139,56 +139,72 @@ namespace SevenFoodApp.View
 
         public void Update()
         {
-            Console.WriteLine("PESQUISAR PELO ID");
-            Console.Write("Nº ID: ");
-            string? idString = Console.ReadLine();
-            int id = 0;
-
-            if (idString != null)
+            try
             {
-                int v = int.Parse(idString);
-                id = v;
-            }
+                Console.WriteLine("PESQUISAR PELO ID");
+                Console.Write("Nº ID: ");
+                string? idString = Please.ConsoleRead();
+                int id = 0;
 
-            Dictionary<string, string>? obj = controller.getById(id);
-
-            if (obj != null)
-            {
-                this.Show(obj);
-
-                Console.WriteLine("ATUALIZE OS DADOS DA COMIDA");
-                Console.Write("Descrição: ");
-                string description = Console.ReadLine() ?? "";
-                description = description == "" ? obj["description"] : description;
-
-                Console.Write("Preço: ");
-                string priceString = Console.ReadLine() ?? "";
-                priceString = priceString == "" ? obj["price"] : priceString;
-                double price = double.Parse(priceString);
-
-                int idRestaurant = int.Parse(obj["idRestaurant"]);
-
-                Console.Write("Disponível: (1 - Sim | 0 - Não)");
-                string active = Console.ReadLine()!;
-                bool status;
-                switch (active)
+                if (idString != null)
                 {
-                    case "":
-                        status = Please.TranslateToBool(obj["status"]); break;
-                    case "1":
-                        status = true; break;
-                    default:
-                        status = false; break;
+                    int v = int.Parse(idString);
+                    id = v;
                 }
 
-                if (controller.update(id, description, idRestaurant, price, status))
-                    Console.WriteLine("Comida Atualizado com sucesso.");
+                Dictionary<string, string>? obj = controller.getById(id);
+
+                if (obj != null)
+                {
+                    this.Show(obj);
+
+                    Console.WriteLine("ATUALIZE OS DADOS DA COMIDA");
+                    Console.Write("Descrição: ");
+                    string description = Please.ConsoleRead() ?? "";
+                    description = description == "" ? obj["description"] : description;
+
+                    Console.Write("Preço: (Formato 0,00)");
+                    string priceString = Please.ConsoleRead() ?? "";
+                    priceString = priceString == "" ? obj["price"] : priceString;
+                    double price = default;
+
+                    try
+                    {
+                        price = double.Parse(priceString);
+                    }
+                    catch
+                    {
+                        throw new Exception("Preço no formato errado, Tente novamente");
+                    }
+
+                    int idRestaurant = int.Parse(obj["idRestaurant"]);
+
+                    Console.Write("Disponível: (1 - Sim | 0 - Não)");
+                    string active = Please.ConsoleRead()!;
+                    bool status;
+                    switch (active)
+                    {
+                        case "":
+                            status = Please.TranslateToBool(obj["status"]); break;
+                        case "1":
+                            status = true; break;
+                        default:
+                            status = false; break;
+                    }
+
+                    if (controller.update(id, description, idRestaurant, price, status))
+                        Console.WriteLine("Comida Atualizado com sucesso.");
+                    else
+                        Console.WriteLine(Please.GetMessageGenericError());
+                }
                 else
-                    Console.WriteLine(Please.GetMessageGenericError());
+                {
+                    Console.WriteLine($"Comida não existe para o id {id}");
+                }
             }
-            else
-            {
-                Console.WriteLine($"Comida não existe para o id {id}");
+            catch (Exception ex) 
+            { 
+                Console.WriteLine(ex.ToString()); 
             }
         }
     }

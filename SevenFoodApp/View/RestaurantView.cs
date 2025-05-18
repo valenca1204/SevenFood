@@ -25,7 +25,7 @@ namespace SevenFoodApp.View
             {
                 Console.WriteLine("CADASTRAR NOVO RESTAURANTE\n");
                 Console.Write("Nome: ");
-                string name = Console.ReadLine() ?? "Nome não Informado";
+                string name = Please.ConsoleRead() ?? "Nome não Informado";
 
                 if (this.controller.Add(name))
                     Console.WriteLine("Restaurante Cadastrado com sucesso.");
@@ -42,7 +42,7 @@ namespace SevenFoodApp.View
         {
             Console.WriteLine("PESQUISAR PELO ID");
             Console.Write("Nº ID: ");
-            string? idString = Console.ReadLine();
+            string? idString = Please.ConsoleRead();
             int id = 0;
 
             if (idString != null)
@@ -61,7 +61,7 @@ namespace SevenFoodApp.View
         {
             Console.WriteLine("PESQUISAR PELO ID");
             Console.Write("Nº ID: ");
-            string? idString = Console.ReadLine();
+            string? idString = Please.ConsoleRead();
             int id = 0;
 
             if (idString != null)
@@ -111,7 +111,7 @@ namespace SevenFoodApp.View
         {
             Console.WriteLine("PESQUISAR PELO ID");
             Console.Write("Nº ID: ");
-            string? idString = Console.ReadLine();
+            string? idString = Please.ConsoleRead();
             int id = 0;
 
             if (idString != null)
@@ -128,11 +128,11 @@ namespace SevenFoodApp.View
 
                 Console.WriteLine("ATUALIZE OS DADOS DO USUÁRIO");
                 Console.Write("Nome: ");
-                string name = Console.ReadLine() ?? "";
+                string name = Please.ConsoleRead() ?? "";
                 name = name == "" ? obj["name"] : name;
 
                 Console.Write("Status: (1 - Ativo | 0 - Inativo)");
-                string active = Console.ReadLine()!;
+                string active = Please.ConsoleRead()!;
                 bool status;
                 switch (active)
                 {
@@ -145,7 +145,7 @@ namespace SevenFoodApp.View
                 }
 
                 if (controller.update(id, name, status))
-                    Console.WriteLine("Usuario Atualizado com sucesso.");
+                    Console.WriteLine("Restaurante Atualizado com sucesso.");
                 else
                     Console.WriteLine(Please.GetMessageGenericError());
             }
