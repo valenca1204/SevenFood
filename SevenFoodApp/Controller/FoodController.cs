@@ -71,7 +71,7 @@ namespace SevenFoodApp.Controller
             return repository.Delete(id);
         }
 
-        internal bool update(int id, string name, int idRestaurant, double price, bool status)
+        internal bool update(int id, string description, int idRestaurant, double price, bool status)
         {
             try
             {
@@ -81,7 +81,7 @@ namespace SevenFoodApp.Controller
                     throw new Exception("Restaurant Inexistente");
                 }
 
-                Food Food = new Food(id, name, price, restaurant, status);
+                Food Food = new Food(id, description, price, restaurant, status);
                 return repository.Update(Food);
             }
             catch (Exception ex)
@@ -98,7 +98,8 @@ namespace SevenFoodApp.Controller
                     { "id", food.Id.ToString() },
                     { "description",  food.Description },
                     { "price",  $"R$ {food.Price.ToString()}" },
-                    { "restaurante",  $"{food.Restaurant.Id.ToString()} - {food.Restaurant.Name}" },
+                    { "restaurant",  $"{food.Restaurant.Id} - {food.Restaurant.Name}" },
+                    { "idRestaurant",  food.Restaurant.Id.ToString() },
                     { "status", Please.TranslateFromBool(food.Status) },
                 };
             return restaurantString;

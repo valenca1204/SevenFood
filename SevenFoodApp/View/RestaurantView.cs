@@ -172,7 +172,5 @@ namespace SevenFoodApp.View
             Console.WriteLine($"ATIVO".PadRight(this.medium));
             Console.WriteLine($"".PadRight(totalSize, '-'));
         }
-
-
     }
 }

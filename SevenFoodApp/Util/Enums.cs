@@ -10,8 +10,8 @@ namespace SevenFoodApp.Util
     {
         public enum ColumnSize : int
         {
-            SMALL = 7,
-            MEDIUM = 15,
+            SMALL = 10,
+            MEDIUM = 20,
             LARGE = 30
         }
 
@@ -44,8 +44,9 @@ namespace SevenFoodApp.Util
         {
             switch (context)
             {
-                case CONTEXT.USER: return "Úsuário";
+                case CONTEXT.USER: return "Usuário";
                 case CONTEXT.RESTAURANT: return "Restaurante";
+                case CONTEXT.FOOD: return "Comida";
                 case CONTEXT.EXIT: return "Sair";
                 default: return "Contexto Inexistente";
             }

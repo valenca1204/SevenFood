@@ -21,7 +21,8 @@ namespace SevenFoodApp.View
             Console.WriteLine();
             Console.WriteLine($"{(int)CONTEXT.USER} - {CONTEXT.USER.Translate()}");
             Console.WriteLine($"{(int)CONTEXT.RESTAURANT} - {CONTEXT.RESTAURANT.Translate()}");
-            Console.WriteLine($"{(int)CONTEXT.EXIT} -  {CONTEXT.EXIT.Translate()}");
+            Console.WriteLine($"{(int)CONTEXT.FOOD} - {CONTEXT.FOOD.Translate()}");
+            Console.WriteLine($"{(int)CONTEXT.EXIT} - {CONTEXT.EXIT.Translate()}");
             Console.WriteLine("-------------------------------------");
         }
 
@@ -33,11 +34,11 @@ namespace SevenFoodApp.View
             Console.WriteLine("-------------------------------------");
             Console.WriteLine();
             Console.WriteLine($"{(int)ACTION.GET_BY_ID} - {ACTION.GET_BY_ID.Translate()}");
-            Console.WriteLine($"{(int)ACTION.GET_ALL} -  {ACTION.GET_ALL.Translate()}");
-            Console.WriteLine($"{(int)ACTION.INSERT} -  {ACTION.INSERT.Translate()}");
-            Console.WriteLine($"{(int)ACTION.UPDATE} -  {ACTION.UPDATE.Translate()}");
-            Console.WriteLine($"{(int)ACTION.DELETE} -  {ACTION.DELETE.Translate()}");
-            Console.WriteLine($"{(int)ACTION.BACK} -  {ACTION.BACK.Translate()}");
+            Console.WriteLine($"{(int)ACTION.GET_ALL} - {ACTION.GET_ALL.Translate()}");
+            Console.WriteLine($"{(int)ACTION.INSERT} - {ACTION.INSERT.Translate()}");
+            Console.WriteLine($"{(int)ACTION.UPDATE} - {ACTION.UPDATE.Translate()}");
+            Console.WriteLine($"{(int)ACTION.DELETE} - {ACTION.DELETE.Translate()}");
+            Console.WriteLine($"{(int)ACTION.BACK} - {ACTION.BACK.Translate()}");
             Console.WriteLine("-------------------------------------");
         }
 
