@@ -36,7 +36,7 @@ namespace SevenFoodApp.Controller
 
                 foreach (var restaurant in restaurants)
                 {
-                    var userString = this.castObjectToDictionary(restaurant); ;
+                    var userString = this.castObjectToDictionary(restaurant);
                     restaurantsString.Add(userString);
                 }
                 return restaurantsString;
