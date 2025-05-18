@@ -6,14 +6,13 @@ using static SevenFoodApp.Util.Enums;
 
 Please.StartDataBase();
 bool hasContinue = true;
-// LoginView.Login();
+LoginView.Login();
 
 while (hasContinue)
 {
     bool hasBack = false;
     Menu.Begin();
     CONTEXT option = Menu.GetOption<CONTEXT>(Please.ChoiceOption());
-    // ACTION action;
 
     switch (option)
     {

@@ -26,6 +26,9 @@ namespace SevenFoodApp.Repository
 
         public static void StartFiles()
         {
+            if (!Directory.Exists(PATH_FOLDER))
+                Directory.CreateDirectory(PATH_FOLDER);
+
             if (!File.Exists(PATH_FILE_ID))
                 File.WriteAllText(PATH_FILE_ID, "1");
 
