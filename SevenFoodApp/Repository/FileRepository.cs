@@ -14,6 +14,7 @@ namespace SevenFoodApp.Repository
         private const string PATH_FILE_ID = "ids.txt";
         private const string PATH_FILE_USER = "users.txt";
         private const string PATH_FILE_RESTAURANT = "restaurants.txt";
+        private const string PATH_FILE_FOOD = "foods.txt";
         private string PathContext { get; }
 
         public FileRepository(CONTEXT context)
@@ -30,8 +31,11 @@ namespace SevenFoodApp.Repository
             if (!File.Exists(PATH_FILE_USER))
                 File.WriteAllText(PATH_FILE_USER, "1,Dudats,admin,0\n");
 
-            if (!File.Exists(PATH_FILE_USER))
+            if (!File.Exists(PATH_FILE_RESTAURANT))
                 File.WriteAllText(PATH_FILE_RESTAURANT, "");
+
+            if (!File.Exists(PATH_FILE_FOOD))
+                File.WriteAllText(PATH_FILE_FOOD, "");
         }
 
         public static int getLastId()
@@ -53,6 +57,8 @@ namespace SevenFoodApp.Repository
                     return PATH_FILE_USER;
                 case CONTEXT.RESTAURANT:
                     return PATH_FILE_RESTAURANT;
+                case CONTEXT.FOOD:
+                    return PATH_FILE_FOOD;
                 default:
                     throw new NotImplementedException();
             }
@@ -122,7 +128,7 @@ namespace SevenFoodApp.Repository
 
         public string[] GetAll()
         {
-            return File.ReadAllLines(this.PathContext);                
+            return File.ReadAllLines(this.PathContext);
         }
 
         public bool Delete(int id)

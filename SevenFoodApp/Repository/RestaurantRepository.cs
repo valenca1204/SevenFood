@@ -14,11 +14,11 @@ namespace SevenFoodApp.Repository
 
         public RestaurantRepository(CONTEXT context) : base(context) { }
 
-        public override Restaurant? StringToObject(string _user)
+        public override Restaurant? StringToObject(string _restaurant)
         {
             try
             {
-                string[] values = _user.Split(",");
+                string[] values = _restaurant.Split(",");
                 int id = int.Parse(values[0]);
                 string name = values[1];
                 bool active = bool.Parse(values[2]);

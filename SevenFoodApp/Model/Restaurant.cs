@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SevenFoodApp.Model
 {
-    internal class Restaurant : AModel
+    public class Restaurant : AModel
     {
         public string Name { get; set; }
         public bool Active { get; set; }
