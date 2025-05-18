@@ -19,7 +19,7 @@ namespace SevenFoodApp.Repository
         {
             try
             {
-                string[] values = _food.Split(",");
+                string[] values = _food.Split(";");
                 
                 int id = int.Parse(values[0]);
                 string name = values[1];
@@ -46,7 +46,7 @@ namespace SevenFoodApp.Repository
 
         public override string ToString(Food food)
         {
-            return $"{food.Id},{food.Description},{food.Price},{food.Restaurant.Id},{food.Status}";
+            return $"{food.Id};{food.Description};{food.Price};{food.Restaurant.Id};{food.Status}";
         }
     }
 }

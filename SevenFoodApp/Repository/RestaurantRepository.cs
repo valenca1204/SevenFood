@@ -18,7 +18,7 @@ namespace SevenFoodApp.Repository
         {
             try
             {
-                string[] values = _restaurant.Split(",");
+                string[] values = _restaurant.Split(";");
                 int id = int.Parse(values[0]);
                 string name = values[1];
                 bool active = bool.Parse(values[2]);
@@ -34,7 +34,7 @@ namespace SevenFoodApp.Repository
         }
         public override string ToString(Restaurant restaurant)
         {
-            return $"{restaurant.Id},{restaurant.Name},{restaurant.Active}";
+            return $"{restaurant.Id};{restaurant.Name};{restaurant.Active}";
         }
     }
 }

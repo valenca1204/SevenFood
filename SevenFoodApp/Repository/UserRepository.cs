@@ -14,7 +14,7 @@ namespace SevenFoodApp.Repository
         {
             try
             {
-                string[] values = _user.Split(",");
+                string[] values = _user.Split(";");
                 int id = int.Parse(values[0]);
                 string name = values[1];
                 string password = values[2];
@@ -31,7 +31,7 @@ namespace SevenFoodApp.Repository
 
         public override string ToString(User user)
         {            
-            return $"{user.Id},{user.Name},{user.Password},{(int)user.Type}";
+            return $"{user.Id};{user.Name};{user.Password};{(int)user.Type}";
         }
     }
 }

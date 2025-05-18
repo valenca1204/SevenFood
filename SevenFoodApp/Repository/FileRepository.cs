@@ -11,10 +11,11 @@ namespace SevenFoodApp.Repository
 {
     internal class FileRepository
     {
-        private const string PATH_FILE_ID = "ids.txt";
-        private const string PATH_FILE_USER = "users.txt";
-        private const string PATH_FILE_RESTAURANT = "restaurants.txt";
-        private const string PATH_FILE_FOOD = "foods.txt";
+        private const string PATH_FOLDER = "db";
+        private const string PATH_FILE_ID = $"{PATH_FOLDER}/ids.txt";
+        private const string PATH_FILE_USER = $"{PATH_FOLDER}/users.txt";
+        private const string PATH_FILE_RESTAURANT = $"{PATH_FOLDER}/restaurants.txt";
+        private const string PATH_FILE_FOOD = $"{PATH_FOLDER}/foods.txt";
         private string PathContext { get; }
 
         public FileRepository(CONTEXT context)
@@ -29,7 +30,7 @@ namespace SevenFoodApp.Repository
                 File.WriteAllText(PATH_FILE_ID, "1");
 
             if (!File.Exists(PATH_FILE_USER))
-                File.WriteAllText(PATH_FILE_USER, "1,Dudats,admin,0\n");
+                File.WriteAllText(PATH_FILE_USER, "1;Dudats;admin;0\n");
 
             if (!File.Exists(PATH_FILE_RESTAURANT))
                 File.WriteAllText(PATH_FILE_RESTAURANT, "");
@@ -71,7 +72,7 @@ namespace SevenFoodApp.Repository
                 string[] objects = File.ReadAllLines(this.PathContext);
                 foreach (string obj in objects)
                 {
-                    string[] fields = obj.Split(",");
+                    string[] fields = obj.Split(";");
 
                     if ((fields.Length > 0) && (fields[0].Equals(id.ToString())))
                         return obj;
@@ -89,7 +90,7 @@ namespace SevenFoodApp.Repository
         {
             try
             {
-                File.AppendAllText(this.PathContext, $"{entityInString}\n");
+                File.AppendAllText(this.PathContext, $"{entityInString.Replace(";", "")}\n");
                 this.setLastId(id);
                 return true;
             }
@@ -107,11 +108,11 @@ namespace SevenFoodApp.Repository
 
                 for (int i = 0; i < objects.Length; i++)
                 {
-                    string[] obj = objects[i].Split(",");
+                    string[] obj = objects[i].Split(";");
 
                     if ((obj.Length > 0) && (obj[0].Equals(id.ToString())))
                     {
-                        objects[i] = entityInString;
+                        objects[i] = entityInString.Replace(";", "");
                     }
                 }
                 File.WriteAllLines(this.PathContext, objects);
@@ -140,7 +141,7 @@ namespace SevenFoodApp.Repository
 
                 for (i = 0; i < objects.Count(); i++)
                 {
-                    string[] obj = objects[i].Split(",");
+                    string[] obj = objects[i].Split(";");
 
                     if ((obj.Length > 0) && (obj[0].Equals(id.ToString())))
                         break;
