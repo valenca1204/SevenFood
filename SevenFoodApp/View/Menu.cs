@@ -30,12 +30,12 @@ namespace SevenFoodApp.View
             Console.WriteLine(">>> USUÁRIO <<<");
             Console.WriteLine("-------------------------------------");
             Console.WriteLine();
-            Console.WriteLine($"{(int)USER.GET_BY_ID} - Buscar pelo ID ");
-            Console.WriteLine($"{(int)USER.GET_ALL} - Listar todos");
-            Console.WriteLine($"{(int)USER.INSERT} - Cadastrar");
-            Console.WriteLine($"{(int)USER.UPDATE} - Atualizar");
-            Console.WriteLine($"{(int)USER.DELETE} - Apagar");
-            Console.WriteLine($"{(int)USER.BACK} - Voltar");
+            Console.WriteLine($"{(int)ACTION.GET_BY_ID} - Buscar pelo ID ");
+            Console.WriteLine($"{(int)ACTION.GET_ALL} - Listar todos");
+            Console.WriteLine($"{(int)ACTION.INSERT} - Cadastrar");
+            Console.WriteLine($"{(int)ACTION.UPDATE} - Atualizar");
+            Console.WriteLine($"{(int)ACTION.DELETE} - Apagar");
+            Console.WriteLine($"{(int)ACTION.BACK} - Voltar");
             Console.WriteLine("-------------------------------------");
         }
 
@@ -46,12 +46,12 @@ namespace SevenFoodApp.View
             Console.WriteLine(">>> RESTAURANTE <<<");
             Console.WriteLine("-------------------------------------");
             Console.WriteLine();
-            Console.WriteLine($"{(int)USER.GET_BY_ID} - Buscar pelo ID ");
-            Console.WriteLine($"{(int)USER.GET_ALL} - Listar todos");
-            Console.WriteLine($"{(int)USER.INSERT} - Cadastrar");
-            Console.WriteLine($"{(int)USER.UPDATE} - Atualizar");
-            Console.WriteLine($"{(int)USER.DELETE} - Apagar");
-            Console.WriteLine($"{(int)USER.BACK} - Voltar");
+            Console.WriteLine($"{(int)ACTION.GET_BY_ID} - Buscar pelo ID ");
+            Console.WriteLine($"{(int)ACTION.GET_ALL} - Listar todos");
+            Console.WriteLine($"{(int)ACTION.INSERT} - Cadastrar");
+            Console.WriteLine($"{(int)ACTION.UPDATE} - Atualizar");
+            Console.WriteLine($"{(int)ACTION.DELETE} - Apagar");
+            Console.WriteLine($"{(int)ACTION.BACK} - Voltar");
             Console.WriteLine("-------------------------------------");
         }
 

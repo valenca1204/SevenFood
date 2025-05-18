@@ -45,14 +45,29 @@ namespace SevenFoodApp.Controller
             return Please.GetNextId();
         }
 
-        public List<User> getAll()
+        public List<Dictionary<string, string>>? getAll()
         {
-            return userRepository.GetAll();
+
+            List<User> users = userRepository.GetAll();
+
+            if (users != null && users.Count() > 0)
+            {
+                var usersString = new List<Dictionary<string, string>>();
+
+                foreach (var user in users)
+                {
+                    var userString = this.castObjectToDictionary(user); ;
+                    usersString.Add(userString);
+                }
+                return usersString;
+            }
+            return null;
         }
 
-        public User? getById(int id)
+        public Dictionary<string, string>? getById(int id)
         {
-            return userRepository.GetById(id);
+            User? user = userRepository.GetById(id);
+            return user != null ? this.castObjectToDictionary(user) : null;
         }
 
         public bool remove(int id)
@@ -80,6 +95,18 @@ namespace SevenFoodApp.Controller
 
             }
 
+        }
+
+        private Dictionary<string, string> castObjectToDictionary(User user)
+        {
+            var userString = new Dictionary<string, string>
+                {
+                    { "id", user.Id.ToString() },
+                    { "name",  user.Name },
+                    { "password", user.Password.Substring(0, 3) + "******" },
+                    { "type", user.Type.Translate() },
+                };
+            return userString;
         }
     }
 }

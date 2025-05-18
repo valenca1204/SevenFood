@@ -16,7 +16,9 @@ namespace SevenFoodApp.View
         int small = (int)Enums.ColumnSize.SMALL;
         int medium = (int)Enums.ColumnSize.MEDIUM;
         int large = (int)Enums.ColumnSize.LARGE;
+        
         RestaurantController controller = new RestaurantController();
+        
         public void Add()
         {
             try
@@ -28,7 +30,7 @@ namespace SevenFoodApp.View
                 if (this.controller.Add(name))
                     Console.WriteLine("Restaurante Cadastrado com sucesso.");
                 else
-                    Console.WriteLine("Algo de errado não está certo :(");
+                    Console.WriteLine(Please.GetMessageGenericError());
             }
             catch (Exception ex)
             {
@@ -52,7 +54,7 @@ namespace SevenFoodApp.View
             if (controller.remove(id))
                 Console.WriteLine("Restaurante removido com sucesso.");
             else
-                Console.WriteLine("Algo de errado não está certo :(");
+                Console.WriteLine(Please.GetMessageGenericError());
         }
 
         public void ShowById()
@@ -68,7 +70,7 @@ namespace SevenFoodApp.View
                 id = v;
             }
 
-            Restaurant? obj = controller.getById(id);
+            var obj = controller.getById(id);
 
             if (obj != null)
             {
@@ -76,17 +78,17 @@ namespace SevenFoodApp.View
             }
             else
             {
-                Console.WriteLine($"Usuário não existe para o id {id}");
+                Console.WriteLine($"Restaurante não existe para o id {id}");
             }
         }
-        public void Show(Restaurant obj)
+        public void Show(Dictionary<string, string> obj)
         {
             if (obj != null)
             {
-                Console.WriteLine("CADASTRO DO USUÁRIO\n");
-                Console.WriteLine($"Id   : {obj.Id}");
-                Console.WriteLine($"Nome : {obj.Name}");
-                Console.WriteLine($"Ativo: {obj.Active}");
+                Console.WriteLine("CADASTRO DO RESTAURANTE\n");
+                Console.WriteLine($"Id   : {obj["id"]}");
+                Console.WriteLine($"Nome : {obj["name"]}");
+                Console.WriteLine($"Ativo: {obj["active"]}");
             }
 
         }
@@ -94,9 +96,14 @@ namespace SevenFoodApp.View
         public void ShowAll()
         {
             this.ShowTitle();
-            foreach (Restaurant restaurant in controller.getAll())
+            var objs = controller.getAll();
+
+            if (objs != null && objs.Count() > 0)
             {
-                this.ShowInLine(restaurant);
+                foreach (Dictionary<string, string> obj in objs)
+                {
+                    this.ShowInLine(obj);
+                }
             }
         }
 
@@ -113,7 +120,7 @@ namespace SevenFoodApp.View
                 id = v;
             }
 
-            Restaurant? obj = controller.getById(id);
+            Dictionary<string, string>? obj = controller.getById(id);
 
             if (obj != null)
             {
@@ -122,8 +129,7 @@ namespace SevenFoodApp.View
                 Console.WriteLine("ATUALIZE OS DADOS DO USUÁRIO");
                 Console.Write("Nome: ");
                 string name = Console.ReadLine() ?? "";
-
-                name = name == "" ? obj!.Name : name;
+                name = name == "" ? obj["name"] : name;
 
                 Console.Write("Status: (1 - Ativo | 0 - Inativo)");
                 string active = Console.ReadLine()!;
@@ -131,7 +137,7 @@ namespace SevenFoodApp.View
                 switch (active)
                 {
                     case "":
-                        status = obj.Active; break;
+                        status = Please.TranslateToBool(obj["active"]); break;
                     case "1":
                         status = true; break;
                     default:
@@ -141,19 +147,19 @@ namespace SevenFoodApp.View
                 if (controller.update(id, name, status))
                     Console.WriteLine("Usuario Atualizado com sucesso.");
                 else
-                    Console.WriteLine("Erro de errado não está certo :(");
+                    Console.WriteLine(Please.GetMessageGenericError());
             }
             else
             {
-                Console.WriteLine($"Usuário não existe para o id {id}");
+                Console.WriteLine($"Restaurante não existe para o id {id}");
             }
         }
 
-        private void ShowInLine(Restaurant restaurant)
+        private void ShowInLine(Dictionary<string, string> obj)
         {
-            Console.Write($"{restaurant.Id.ToString().PadRight(this.small)}");
-            Console.Write($"{restaurant.Name.PadRight(this.large)[..(this.large - 1)]} ");
-            Console.Write($"{restaurant.Active.ToString().PadRight(this.medium)}");
+            Console.Write($"{obj["id"].ToString().PadRight(this.small)}");
+            Console.Write($"{obj["name"].PadRight(this.large)[..(this.large - 1)]} ");
+            Console.Write($"{obj["active"].PadRight(this.medium)}");
             Console.WriteLine("");
         }
 
@@ -166,5 +172,7 @@ namespace SevenFoodApp.View
             Console.WriteLine($"ATIVO".PadRight(this.medium));
             Console.WriteLine($"".PadRight(totalSize, '-'));
         }
+
+
     }
 }

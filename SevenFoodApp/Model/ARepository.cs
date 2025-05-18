@@ -17,8 +17,8 @@ namespace SevenFoodApp.Model
         public ARepository(CONTEXT context)
         {
             this.fileRepository = new FileRepository(context);
-
         }
+
 
         public T? GetById(int id)
         {

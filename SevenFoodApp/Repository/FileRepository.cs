@@ -14,11 +14,11 @@ namespace SevenFoodApp.Repository
         private const string PATH_FILE_ID = "ids.txt";
         private const string PATH_FILE_USER = "users.txt";
         private const string PATH_FILE_RESTAURANT = "restaurants.txt";
-        private string Context { get; }
+        private string PathContext { get; }
 
         public FileRepository(CONTEXT context)
         {
-            this.Context = this.getPath(context);
+            this.PathContext = this.getPath(context);
             StartFiles();
         }
 
@@ -62,7 +62,7 @@ namespace SevenFoodApp.Repository
         {
             try
             {
-                string[] objects = File.ReadAllLines(this.Context);
+                string[] objects = File.ReadAllLines(this.PathContext);
                 foreach (string obj in objects)
                 {
                     string[] fields = obj.Split(",");
@@ -83,7 +83,7 @@ namespace SevenFoodApp.Repository
         {
             try
             {
-                File.AppendAllText(this.Context, $"{entityInString}\n");
+                File.AppendAllText(this.PathContext, $"{entityInString}\n");
                 this.setLastId(id);
                 return true;
             }
@@ -97,7 +97,7 @@ namespace SevenFoodApp.Repository
         {
             try
             {
-                string[] objects = File.ReadAllLines(this.Context);
+                string[] objects = File.ReadAllLines(this.PathContext);
 
                 for (int i = 0; i < objects.Length; i++)
                 {
@@ -108,7 +108,7 @@ namespace SevenFoodApp.Repository
                         objects[i] = entityInString;
                     }
                 }
-                File.WriteAllLines(this.Context, objects);
+                File.WriteAllLines(this.PathContext, objects);
                 return true;
 
             }
@@ -122,7 +122,7 @@ namespace SevenFoodApp.Repository
 
         public string[] GetAll()
         {
-            return File.ReadAllLines(PATH_FILE_USER);                
+            return File.ReadAllLines(this.PathContext);                
         }
 
         public bool Delete(int id)
@@ -141,10 +141,12 @@ namespace SevenFoodApp.Repository
 
                 }
 
-                if (i > 0)
-                    objects.RemoveAt(i);
+                if (i >= objects.Count())
+                    return false;
 
-                File.WriteAllLines(this.Context, objects);
+                objects.RemoveAt(i);
+
+                File.WriteAllLines(this.PathContext, objects);
                 return true;
 
             }

@@ -9,29 +9,12 @@ using static SevenFoodApp.Util.Enums;
 
 namespace SevenFoodApp.Repository
 {
-    internal class RestaurantRepository //: //IRepository<Restaurant>
+    internal class RestaurantRepository : ARepository<Restaurant>
     {
-        private const string PATH_FILE_ID = "ids.txt";
-        private const string PATH_FILE_RESTAURANT = "restaurants.txt";
 
-        public RestaurantRepository()
-        {
-            if (!File.Exists(PATH_FILE_RESTAURANT))
-                File.WriteAllText(PATH_FILE_RESTAURANT, "");
-        }
+        public RestaurantRepository(CONTEXT context) : base(context) { }
 
-        public int getLastId()
-        {
-            var ids = File.ReadAllLines(PATH_FILE_ID);
-            return int.Parse(ids.Last());
-        }
-
-        private void setLastId(int id)
-        {
-            File.WriteAllText(PATH_FILE_ID, id.ToString());
-        }
-
-        private Restaurant? CastFromString(string _user)
+        public override Restaurant? StringToObject(string _user)
         {
             try
             {
@@ -49,124 +32,9 @@ namespace SevenFoodApp.Repository
             }
 
         }
-        private string toString(Restaurant restaurant)
+        public override string ToString(Restaurant restaurant)
         {
             return $"{restaurant.Id},{restaurant.Name},{restaurant.Active}";
-        }        
-
-        public bool Delete(int id)
-        {
-            try
-            {
-                List<string> _users = File.ReadAllLines(PATH_FILE_RESTAURANT).ToList();
-                int i = 0;
-
-                for (i = 0; i < _users.Count(); i++)
-                {
-                    Restaurant? restaurant = this.CastFromString(_users[i]);
-
-                    if ((restaurant != null) && (restaurant.Id == id))
-                        break;
-
-                }
-
-                if (i > 0)
-                    _users.RemoveAt(i);
-
-                File.WriteAllLines(PATH_FILE_RESTAURANT, _users);
-                return true;
-
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-                return false;
-
-            }
-        }
-
-        public List<Restaurant> GetAll()
-        {
-            List<Restaurant> list = new List<Restaurant>();
-            try
-            {
-                string[] _restaurants = File.ReadAllLines(PATH_FILE_RESTAURANT);
-                foreach (string _restaurant in _restaurants)
-                {
-                    Restaurant? restaurant = this.CastFromString(_restaurant);
-                    if (restaurant != null)
-                        list.Add(restaurant);
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-
-            }
-            return list;
-        }
-
-        public Restaurant? GetById(int id)
-        {
-            try
-            {
-                string[] _restaurants = File.ReadAllLines(PATH_FILE_RESTAURANT);
-                foreach (string _restaurant in _restaurants)
-                {
-                    Restaurant? restaurant = this.CastFromString(_restaurant);
-
-                    if ((restaurant != null) && (restaurant.Id == id))
-                        return restaurant;
-                }
-                return null;
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-                return null;
-            }
-        }
-
-        public bool Insert(Restaurant entity)
-        {
-            try
-            {
-                string restaurant = this.toString(entity);
-                File.AppendAllText(PATH_FILE_RESTAURANT, $"{restaurant}\n");
-                this.setLastId(entity.Id);
-                return true;
-            }
-            catch
-            {
-                return false;
-            }
-        }
-
-        public bool Update(Restaurant entity)
-        {
-            try
-            {
-                string[] _restaurants = File.ReadAllLines(PATH_FILE_RESTAURANT);
-
-                for (int i = 0; i < _restaurants.Length; i++)
-                {
-                    Restaurant? restaurant = this.CastFromString(_restaurants[i]);
-
-                    if ((restaurant != null) && (restaurant.Id == entity.Id))
-                    {
-                        _restaurants[i] = this.toString(entity);
-                    }
-                }
-                File.WriteAllLines(PATH_FILE_RESTAURANT, _restaurants);
-                return true;
-
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-                return false;
-
-            }
         }
     }
 }

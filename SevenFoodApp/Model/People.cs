@@ -9,7 +9,6 @@ namespace SevenFoodApp.Model
 {
     internal abstract class People : AModel
     {
-        // public int Id { get; set; }
         public string Name { get; set; }
         public string Password { get; set; }
 
@@ -17,7 +16,6 @@ namespace SevenFoodApp.Model
 
         public People(int id, string name, string password, TYPE_USER type = TYPE_USER.Client) : base(id)
         {
-            //this.Id = id;
             this.Name = name;
             this.Password = password;
             this.Type = type;

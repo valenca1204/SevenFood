@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SevenFoodApp.Util
 {
-    public class Enums
+    public static class Enums
     {
         public enum ColumnSize : int
         {
@@ -22,7 +22,7 @@ namespace SevenFoodApp.Util
             RESTAURANT = 2,
         }
 
-        public enum USER : int
+        public enum ACTION : int
         {
             BACK = 0,
             GET_BY_ID = 1,
@@ -47,6 +47,42 @@ namespace SevenFoodApp.Util
             Admin = 0,
             Owner = 1,
             Client = 2,
+        }
+
+        public static string Translate(this CONTEXT context)
+        {
+            switch (context)
+            {
+                case CONTEXT.USER: return "Úsuário";
+                case CONTEXT.RESTAURANT: return "Restaurante";
+                case CONTEXT.EXIT: return "Sair";
+                default: return "Contexto Inexistente";
+            }
+        }
+
+        public static string Translate(this ACTION action)
+        {
+            switch (action)
+            {
+                case ACTION.BACK: return "Voltar";
+                case ACTION.GET_BY_ID: return "Buscar por ID";
+                case ACTION.GET_ALL: return "Listar Todos";
+                case ACTION.INSERT: return "Cadastrar";
+                case ACTION.UPDATE: return "Atualizar";
+                case ACTION.DELETE: return "Remover";
+                default: return "Ação Inexistente";
+            }
+        }
+
+        public static string Translate(this TYPE_USER action)
+        {
+            switch (action)
+            {
+                case TYPE_USER.Admin: return "Administrador";
+                case TYPE_USER.Owner: return "Dono de Restaurante";
+                case TYPE_USER.Client: return "Cliente";
+                default: return "Ação Inexistente";
+            }
         }
     }
 }
