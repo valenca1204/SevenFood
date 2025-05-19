@@ -2,6 +2,22 @@
 Projeto a pedidos dos alunos do 3º período de Engenharia de Computação do Unasp-EC. 2025.1.
 
 # Release
+## [SevenFood_1.3](https://github.com/ProfDudarts/SevenFood/raw/refs/heads/main/SevenFoodApp/bin/Releases/SevenFoodApp_1.3.exe)
+  ### Release Note: 17/05/2025
+  #### Novidades
+  - Adição do fluxo de cadastro de comida;
+  - Refatoração do banco de dados;
+  - Adição de camada de segurança contra o bug do ponto e vírgula no "banco de dados";
+  - Exibição de preço no formato `currenty`, padrão local (Brasil): `R$ 00,00`;
+  - Centralização do Menu de opção de cada contexto;
+  - Mais opções de tamanho de colunas para as views;
+
+  #### Correções
+  - Ajustes nas colunas que estavam truncadas;
+  - Ajuste nos modificador de acesso;
+  - Adiciona os arquivos de banco de dados em uma única pasta;
+  - Correção de nomeclaturas de variáveis e mensagens de acordo com o contexto;
+
 ## [SevenFood_1.2](https://github.com/ProfDudarts/SevenFood/raw/refs/heads/main/SevenFoodApp/bin/Releases/SevenFoodApp_1.2.exe)
   ### Release Note: 17/05/2025
   #### Novidades
