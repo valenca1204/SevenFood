@@ -11,9 +11,11 @@ namespace SevenFoodApp.Repository
 {
     internal class FileRepository
     {
-        private const string PATH_FILE_ID = "ids.txt";
-        private const string PATH_FILE_USER = "users.txt";
-        private const string PATH_FILE_RESTAURANT = "restaurants.txt";
+        private const string PATH_FOLDER = "db";
+        private const string PATH_FILE_ID = $"{PATH_FOLDER}/ids.txt";
+        private const string PATH_FILE_USER = $"{PATH_FOLDER}/users.txt";
+        private const string PATH_FILE_RESTAURANT = $"{PATH_FOLDER}/restaurants.txt";
+        private const string PATH_FILE_FOOD = $"{PATH_FOLDER}/foods.txt";
         private string PathContext { get; }
 
         public FileRepository(CONTEXT context)
@@ -24,14 +26,20 @@ namespace SevenFoodApp.Repository
 
         public static void StartFiles()
         {
+            if (!Directory.Exists(PATH_FOLDER))
+                Directory.CreateDirectory(PATH_FOLDER);
+
             if (!File.Exists(PATH_FILE_ID))
                 File.WriteAllText(PATH_FILE_ID, "1");
 
             if (!File.Exists(PATH_FILE_USER))
-                File.WriteAllText(PATH_FILE_USER, "1,Dudats,admin,0\n");
+                File.WriteAllText(PATH_FILE_USER, "1;Dudats;admin;0\n");
 
-            if (!File.Exists(PATH_FILE_USER))
+            if (!File.Exists(PATH_FILE_RESTAURANT))
                 File.WriteAllText(PATH_FILE_RESTAURANT, "");
+
+            if (!File.Exists(PATH_FILE_FOOD))
+                File.WriteAllText(PATH_FILE_FOOD, "");
         }
 
         public static int getLastId()
@@ -53,6 +61,8 @@ namespace SevenFoodApp.Repository
                     return PATH_FILE_USER;
                 case CONTEXT.RESTAURANT:
                     return PATH_FILE_RESTAURANT;
+                case CONTEXT.FOOD:
+                    return PATH_FILE_FOOD;
                 default:
                     throw new NotImplementedException();
             }
@@ -65,7 +75,7 @@ namespace SevenFoodApp.Repository
                 string[] objects = File.ReadAllLines(this.PathContext);
                 foreach (string obj in objects)
                 {
-                    string[] fields = obj.Split(",");
+                    string[] fields = obj.Split(";");
 
                     if ((fields.Length > 0) && (fields[0].Equals(id.ToString())))
                         return obj;
@@ -101,7 +111,7 @@ namespace SevenFoodApp.Repository
 
                 for (int i = 0; i < objects.Length; i++)
                 {
-                    string[] obj = objects[i].Split(",");
+                    string[] obj = objects[i].Split(";");
 
                     if ((obj.Length > 0) && (obj[0].Equals(id.ToString())))
                     {
@@ -122,7 +132,7 @@ namespace SevenFoodApp.Repository
 
         public string[] GetAll()
         {
-            return File.ReadAllLines(this.PathContext);                
+            return File.ReadAllLines(this.PathContext);
         }
 
         public bool Delete(int id)
@@ -134,7 +144,7 @@ namespace SevenFoodApp.Repository
 
                 for (i = 0; i < objects.Count(); i++)
                 {
-                    string[] obj = objects[i].Split(",");
+                    string[] obj = objects[i].Split(";");
 
                     if ((obj.Length > 0) && (obj[0].Equals(id.ToString())))
                         break;

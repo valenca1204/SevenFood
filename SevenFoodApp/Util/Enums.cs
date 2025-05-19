@@ -8,11 +8,13 @@ namespace SevenFoodApp.Util
 {
     public static class Enums
     {
-        public enum ColumnSize : int
+        public enum SIZE : int
         {
-            SMALL = 7,
-            MEDIUM = 15,
-            LARGE = 30
+            FIVE = 5,
+            TEN = 10,
+            FIFTEEN = 15,
+            TWENTY = 20,
+            THIRTY = 30
         }
 
         public enum CONTEXT : int
@@ -20,19 +22,10 @@ namespace SevenFoodApp.Util
             EXIT = 0,
             USER = 1,
             RESTAURANT = 2,
+            FOOD = 3,
         }
 
         public enum ACTION : int
-        {
-            BACK = 0,
-            GET_BY_ID = 1,
-            GET_ALL = 2,
-            INSERT = 3,
-            UPDATE = 4,
-            DELETE = 5,
-        }
-
-        public enum RESTAURANT : int
         {
             BACK = 0,
             GET_BY_ID = 1,
@@ -53,8 +46,9 @@ namespace SevenFoodApp.Util
         {
             switch (context)
             {
-                case CONTEXT.USER: return "Úsuário";
+                case CONTEXT.USER: return "Usuário";
                 case CONTEXT.RESTAURANT: return "Restaurante";
+                case CONTEXT.FOOD: return "Comida";
                 case CONTEXT.EXIT: return "Sair";
                 default: return "Contexto Inexistente";
             }

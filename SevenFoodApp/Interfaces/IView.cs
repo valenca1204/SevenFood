@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SevenFoodApp.Interfaces
 {
-    internal interface IView
+    public interface IView
     {
         void Add();
         void ShowById();

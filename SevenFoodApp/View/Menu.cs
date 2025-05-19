@@ -1,4 +1,6 @@
-﻿using System;
+﻿using SevenFoodApp.Interfaces;
+using SevenFoodApp.Util;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -8,7 +10,7 @@ using static SevenFoodApp.Util.Enums;
 
 namespace SevenFoodApp.View
 {
-    internal class Menu
+    public static class Menu
     {
         public static void Begin()
         {
@@ -17,44 +19,63 @@ namespace SevenFoodApp.View
             Console.WriteLine(">>> Bem Vindo do 7Food <<<");
             Console.WriteLine("-------------------------------------");
             Console.WriteLine();
-            Console.WriteLine($"{(int)CONTEXT.USER} - Usuários");
-            Console.WriteLine($"{(int)CONTEXT.RESTAURANT} - Restaurantes");
-            Console.WriteLine($"{(int)CONTEXT.EXIT} - Sair");
+            Console.WriteLine($"{(int)CONTEXT.USER} - {CONTEXT.USER.Translate()}");
+            Console.WriteLine($"{(int)CONTEXT.RESTAURANT} - {CONTEXT.RESTAURANT.Translate()}");
+            Console.WriteLine($"{(int)CONTEXT.FOOD} - {CONTEXT.FOOD.Translate()}");
+            Console.WriteLine($"{(int)CONTEXT.EXIT} - {CONTEXT.EXIT.Translate()}");
             Console.WriteLine("-------------------------------------");
         }
 
-        public static void User()
+        public static void Action()
         {
             Console.Clear();
             Console.WriteLine("-------------------------------------");
             Console.WriteLine(">>> USUÁRIO <<<");
             Console.WriteLine("-------------------------------------");
             Console.WriteLine();
-            Console.WriteLine($"{(int)ACTION.GET_BY_ID} - Buscar pelo ID ");
-            Console.WriteLine($"{(int)ACTION.GET_ALL} - Listar todos");
-            Console.WriteLine($"{(int)ACTION.INSERT} - Cadastrar");
-            Console.WriteLine($"{(int)ACTION.UPDATE} - Atualizar");
-            Console.WriteLine($"{(int)ACTION.DELETE} - Apagar");
-            Console.WriteLine($"{(int)ACTION.BACK} - Voltar");
+            Console.WriteLine($"{(int)ACTION.GET_BY_ID} - {ACTION.GET_BY_ID.Translate()}");
+            Console.WriteLine($"{(int)ACTION.GET_ALL} - {ACTION.GET_ALL.Translate()}");
+            Console.WriteLine($"{(int)ACTION.INSERT} - {ACTION.INSERT.Translate()}");
+            Console.WriteLine($"{(int)ACTION.UPDATE} - {ACTION.UPDATE.Translate()}");
+            Console.WriteLine($"{(int)ACTION.DELETE} - {ACTION.DELETE.Translate()}");
+            Console.WriteLine($"{(int)ACTION.BACK} - {ACTION.BACK.Translate()}");
             Console.WriteLine("-------------------------------------");
         }
 
-        public static void Restaurant()
+        public static void ShowOptionAction(this bool hasBack, IView view)
         {
-            Console.Clear();
-            Console.WriteLine("-------------------------------------");
-            Console.WriteLine(">>> RESTAURANTE <<<");
-            Console.WriteLine("-------------------------------------");
-            Console.WriteLine();
-            Console.WriteLine($"{(int)ACTION.GET_BY_ID} - Buscar pelo ID ");
-            Console.WriteLine($"{(int)ACTION.GET_ALL} - Listar todos");
-            Console.WriteLine($"{(int)ACTION.INSERT} - Cadastrar");
-            Console.WriteLine($"{(int)ACTION.UPDATE} - Atualizar");
-            Console.WriteLine($"{(int)ACTION.DELETE} - Apagar");
-            Console.WriteLine($"{(int)ACTION.BACK} - Voltar");
-            Console.WriteLine("-------------------------------------");
-        }
+            while (!hasBack)
+            {
+                Menu.Action();
+                ACTION action = Menu.GetOption<ACTION>(Please.ChoiceOption());
 
+                switch (action)
+                {
+                    case ACTION.GET_BY_ID:
+                        view.ShowById();
+                        break;
+                    case ACTION.GET_ALL:
+                        view.ShowAll();
+                        break;
+                    case ACTION.INSERT:
+                        view.Add();
+                        break;
+                    case ACTION.DELETE:
+                        view.Remove();
+                        break;
+                    case ACTION.UPDATE:
+                        view.Update();
+                        break;
+                    case ACTION.BACK:
+                    default:
+                        hasBack = true;
+                        break;
+                }
+                if (!hasBack)
+                    Console.ReadKey();
+            }
+        }
+        
         public static T GetOption<T>(string message) {
             T option;
             try
