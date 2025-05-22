@@ -3,6 +3,7 @@ using SevenFoodApp.Interfaces;
 using SevenFoodApp.Model;
 using SevenFoodApp.Util;
 using static SevenFoodApp.Util.Enums;
+using SevenFoodApp.dto;
 
 
 namespace SevenFoodApp.View
@@ -11,6 +12,8 @@ namespace SevenFoodApp.View
     {
         private UserController controller = new UserController();
 
+        private UserDto userDto = new UserDto();
+
         public void Add()
         {
             try
@@ -18,9 +21,11 @@ namespace SevenFoodApp.View
                 Console.WriteLine("CADASTRAR NOVO USUÁRIO\n");
                 Console.Write("Nome: ");
                 string name = Please.ConsoleRead() ?? "Nome não Informado";
+                userDto.Name = name;
+                userDto.Type = TYPE_USER.Client;
 
-                if (this.controller.Add(name, TYPE_USER.Client))
-                    Console.WriteLine("Usuario Cadastrado com sucesso.");
+                if (this.controller.Add(userDto))
+                    Console.WriteLine($"{userDto.Name} , sua senha é {userDto.Senha}");
                 else
                     Console.WriteLine(Please.GetMessageGenericError());
             }
