@@ -1,7 +1,9 @@
-﻿using SevenFoodApp.Model;
+﻿using SevenFoodApp.dto;
+using SevenFoodApp.Model;
 using SevenFoodApp.Repository;
 using SevenFoodApp.Util;
 using static SevenFoodApp.Util.Enums;
+using SevenFoodApp.Dto;
 
 namespace SevenFoodApp.Controller
 {
@@ -108,5 +110,35 @@ namespace SevenFoodApp.Controller
                 };
             return userString;
         }
+
+        internal bool Add(UserDto userDto)
+        {
+            throw new NotImplementedException();
+        }
+
+
+        public class Usercontroller 
+        {
+            public UserResponseDTO CadastrarUser(UserRequestDTO userRequest)
+            {
+                
+                string senhaGerada = GerarSenha();
+
+                
+
+                return new UserResponseDTO
+                {
+                    Nome = userRequest.Nome,
+                    SenhaGerada = senhaGerada
+                };
+            }
+
+            private string GerarSenha()
+            {
+                
+                return "abc123";
+            }
+        }
+
     }
 }

@@ -1,0 +1,8 @@
+namespace SevenFoodApp.Dto
+{
+    public class UserResponseDTO
+    {
+        public string Nome { get; set; }
+        public string SenhaGerada { get; set; }
+    }
+}

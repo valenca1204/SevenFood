@@ -1,50 +1,57 @@
-﻿using SevenFoodApp.Controller;
-using SevenFoodApp.Repository;
-using SevenFoodApp.Util;
+﻿using System;
 using SevenFoodApp.View;
 using static SevenFoodApp.Util.Enums;
 
-Please.StartDataBase();
-bool hasContinue = true;
-LoginView.Login();
-
-while (hasContinue)
+namespace SevenFoodApp
 {
-    bool hasBack = false;
-    Menu.Begin();
-    CONTEXT option = Menu.GetOption<CONTEXT>(Please.ChoiceOption());
-
-    switch (option)
+    class Program
     {
-        case CONTEXT.USER:
-            UserView userView = new UserView();
-            Menu.ShowOptionAction(hasBack, userView);
-            break;
+        static void Main(string[] args)
+        {
+            Please.StartDataBase();
+            bool hasContinue = true;
+            LoginView.Login();
 
-        case CONTEXT.RESTAURANT:
-            RestaurantView restaurantView = new RestaurantView();
-            Menu.ShowOptionAction(hasBack, restaurantView);
-            break;
+            while (hasContinue)
+            {
+                bool hasBack = false;
+                Menu.Begin();
+                CONTEXT option = Menu.GetOption<CONTEXT>(Please.ChoiceOption());
 
-        case CONTEXT.FOOD:
-            FoodView foodView = new FoodView();
-            Menu.ShowOptionAction(hasBack, foodView);
-            break;
+                switch (option)
+                {
+                    case CONTEXT.USER:
+                        UserView userView = new UserView();
+                        userView.CadastrarUsuario();
+                        break;
 
-        case CONTEXT.EXIT:
-        default:
-            hasContinue = false;
-            break;
-    }
+                    case CONTEXT.RESTAURANT:
+                        RestaurantView restaurantView = new RestaurantView();
+                        Menu.ShowOptionAction(hasBack, restaurantView);
+                        break;
 
-    if (hasContinue && !hasBack)
-    {
-        Console.WriteLine("Aperta qualquer tecla para continuar...");
-        Console.ReadKey();
-    }
-    else
-    {
-        Console.Clear();
-        Console.WriteLine("Valeu Prezadinhos...\nAqui é Barril Dobrado, pai!!!");
+                    case CONTEXT.FOOD:
+                        FoodView foodView = new FoodView();
+                        Menu.ShowOptionAction(hasBack, foodView);
+                        break;
+
+                    case CONTEXT.EXIT:
+                    default:
+                        hasContinue = false;
+                        break;
+                }
+
+                if (hasContinue && !hasBack)
+                {
+                    Console.WriteLine("Aperta qualquer tecla para continuar...");
+                    Console.ReadKey();
+                }
+                else
+                {
+                    Console.Clear();
+                    Console.WriteLine("Valeu Prezadinhos...\nAqui é Barril Dobrado, pai!!!");
+                }
+            }
+        }
     }
 }
